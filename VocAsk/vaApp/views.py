@@ -10,3 +10,7 @@ def about(request):
 
 def anleitung(request):
     return render(request, 'anleitung.html')
+
+
+
+

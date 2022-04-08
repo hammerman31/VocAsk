@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>VocAsk</title>
-    
-    
-</head>
-<body>
-    <h1>VocAsk</h1>
-</body>
-</html>
+{% extends 'base_layout.html' %}
+{% load static %}
+{% block content %}
+    <img width="250px" height="175px" src="{% static 'img/symbol_logo.png' %}" alt="VocAsk Logo" class="symbol_logo">
+{% endblock %}

@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,18 +6,49 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>VocAsk</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='static\css\style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_base_layout.css' %}">
     
-    <nav>
-        <ul>
-            <li>
-                <form class="logout-link" action="/accounts/logout/" method="post">
-                    {% csrf_token %}
-                    <button type="submit">Logout</button>
-                </form>
-            </li>
-        </ul>
-    </nav>
+    <a href="/" class="logo">
+        <img width="200px" height="85px" src="{% static 'img/written_logo.png' %}" alt="VocAsk Logo">
+    </a>
+    <div class="menubar">
+        <nav>
+            <ul class="linkslist">
+            <li class="item"><a class="menulinks" href="/">home</a></li>
+            <li class="item"><a class="menulinks" href="/about">about</a></li>
+            <li class="item"><a class="menulinks" href="/anleitung">anleitung</a></li>
+            </ul>
+        </nav>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="menubuttons">
+        <nav>
+            <ul>
+                <li>
+                    <form class="logout-link" action="/accounts/logout/" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="button_small">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {%else%}
+    <div class="menubuttons">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/accounts/login" style="text-decoration: none;">
+                        <button type="submit" class="button_small">Login</button>
+                    </a>
+                    <a href="/accounts/signup" style="text-decoration: none;">
+                        <button type="submit" class="button_small">Signup</button>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {%endif%}
 </head>
 <body>
     {% block content %}

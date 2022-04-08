@@ -24,5 +24,6 @@ urlpatterns = [
     path('about/', views.about),
     path('anleitung/', views.anleitung),
     path('accounts/', include('accounts.urls')),
+    path('abfrage/', include('abfrage.urls')),
 
 ]

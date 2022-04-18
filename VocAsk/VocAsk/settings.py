@@ -55,7 +55,7 @@ ROOT_URLCONF = 'VocAsk.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['vaApp/templates'],
+        'DIRS': ['vaApp/templates', 'accounts/templates/accounts', 'abfrage/templates/abfrage'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

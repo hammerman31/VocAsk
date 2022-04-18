@@ -1,5 +1,6 @@
 from spellchecker import SpellChecker
 from textblob import TextBlob
+import re
 
 #spell = SpellChecker()
 #misspelled = spell.unknown(['sonethimg', 'is', 'hapenig', 'herre', "anwersary", 'borth', "war", ':°to ele8t', 'taxaton', 'representation', 'custums', 'troopps', 'violence', 'anong'])
@@ -13,4 +14,7 @@ for a in lista:
     b = TextBlob(a)
     
     # prints the corrected spelling
-    print(str(b.correct()))
+    #print(str(b.correct()))
+
+
+print(re.sub(r'[^\w]', ' ', lista[7]))

@@ -5,4 +5,5 @@ app_name = 'abfrage'
 
 urlpatterns = [
     path('fotos/', views.fotos_view, name="fotos"),
+    path('korrektur/', views.korrektur),
 ]

@@ -1,0 +1,22 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+
+{% for fields in formEn %}
+<div class="row">
+    <div class="col-md-12">
+      {{fields}}
+    </div>
+  </div>
+{% endfor %}
+
+{% for fields in formDe %}
+<div class="row">
+    <div class="col-md-12">
+      {{fields}}
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}

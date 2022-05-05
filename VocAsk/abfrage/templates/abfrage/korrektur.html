@@ -2,21 +2,25 @@
 
 {% block content %}
 
-
-{% for fields in formEn %}
-<div class="row">
-    <div class="col-md-12">
-      {{fields}}
+<form action="/abfrage/abfrage" metod="POST">
+  {% for fields in formEn %}
+  <div class="row">
+      <div class="col-md-12">
+        {{fields}}
+      </div>
     </div>
-  </div>
-{% endfor %}
+  {% endfor %}
 
-{% for fields in formDe %}
-<div class="row">
-    <div class="col-md-12">
-      {{fields}}
+  {% for fields in formDe %}
+  <div class="row">
+      <div class="col-md-12">
+        {{fields}}
+      </div>
     </div>
-  </div>
-{% endfor %}
+  {% endfor %}
+
+  <input type="submit" value="WEITER">
+
+</form>
 
 {% endblock %}

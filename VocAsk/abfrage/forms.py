@@ -30,3 +30,8 @@ def VocabularyFormDe(vocList):
         fields[str(k)+'_de'] = forms.CharField(initial=id)
         
     return type('tagVocabulary', (forms.BaseForm,), { 'base_fields': fields })
+
+def TitleForm():
+    fields = {}
+    fields['title'] = forms.CharField(max_length=45)
+    return type('tagVocabulary', (forms.BaseForm,), { 'base_fields': fields})

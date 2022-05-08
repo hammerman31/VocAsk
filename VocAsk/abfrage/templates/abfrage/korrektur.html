@@ -19,8 +19,44 @@
     </div>
   {% endfor %}
 
-  <input type="submit" value="WEITER">
+  {% if user.is_authenticated %}
+  <label class="switch">
+    <input type="checkbox" onclick="displayTitleField()" id="switch">
+    <span class="slider round"></span>
+  </label>
+  {% for fields in titleField %}
+  <div id="titleField" style="display:none">
+      {{fields}}
+  </div>
+  {% endfor %}
+  <script>
+    function displayTitleField() {
+      // Get the checkbox
+      var checkBox = document.getElementById("switch");
+      // Get the output text
+      var titleField = document.getElementById("titleField");
 
+      // If the checkbox is checked, display the output text
+      if (checkBox.checked == true){
+        titleField.style.display = "block";
+      } else {
+        titleField.style.display = "none";
+      }
+    }
+  </script>
+  {%endif%}
+
+  <input type="submit" value="WEITER" id="submitButton" onclick="submit()">
+  <script>
+    function submit() {
+      var checkBox = document.getElementById("switch");
+      if (checkBox.checked == false){
+        document.getElementById("id_title").value = "!h4fd46rZMJ4zf&2hm3"
+      }
+      var button = document.getElementById('submitButton');
+      button.form.submit();
+    }
+  </script>
 </form>
 
 {% endblock %}

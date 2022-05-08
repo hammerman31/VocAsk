@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.contrib import sessions
 from django.http import HttpResponse
-from .forms import VocabularyFormEn, VocabularyFormDe 
+from .forms import VocabularyFormEn, VocabularyFormDe, TitleForm
 from vocTransformer import vocTransformer
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from accounts.forms import SubmitVocabularySets
+from django.contrib.auth.models import User
 #from forms import VocabularyForm
 
 # Create your views here.
@@ -34,6 +36,7 @@ def korrektur(request):
         formEn = VocabularyFormEn(vocsen)
         #formEn.createFields()
         formDe = VocabularyFormDe(vocsde)
+        formTitle = TitleForm()
         #formDe.createFields()
         vocslen = len(vocsde)
         #messages.success(request, vocsde, extra_tags="de")
@@ -49,15 +52,17 @@ def korrektur(request):
         message = "No"
         formEn = VocabularyFormEn(request.session['vocsen'])
         formDe = VocabularyFormDe(request.session['vocsde'])
+        formTitle = TitleForm()
         vocslen = len(request.session['vocsde'])
         #formEn.createFields()
         print("Fuck")
     # Hier muss die Korrektur Seite zurück gegeben werden
-    return render(request, 'korrektur.html', {'formEn': formEn, 'formDe': formDe})
+    return render(request, 'korrektur.html', {'formEn': formEn, 'formDe': formDe, 'titleField': formTitle})
+
 
 def abfrage(request):
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
+        # bis else ist das eigentlich irrelevant, weil es hier eine GET request geben wird
         formEn = VocabularyFormEn(request.POST)
         formDe = VocabularyFormDe(request.POST)
         if formEn.is_valid() and formDe.is_valid():
@@ -75,11 +80,21 @@ def abfrage(request):
         for x in range(1, int(vocsLen+1)):
             vocsde.append(request.GET.get(str(x)+'_de', ''))
             vocsen.append(request.GET.get(str(x)+'_en', ''))
-
+        if request.GET.get('title') != '':
+            form1 = SubmitVocabularySets()
+            form = form1.save(commit=False)
+            form.title = request.GET.get('title')
+            form.vocEn = str(vocsen)
+            form.vocDe = str(vocsde)
+            form.user = request.user
+            form.save()
         messages.success(request, vocsde, extra_tags="de")
         messages.success(request, vocsen, extra_tags="en")
         
         return render(request, 'abfrage.html')
+
+
+
 
 @csrf_exempt
 def audio_data(request):
@@ -116,4 +131,3 @@ def audio_data(request):
     
     #translation = translator.translate(text)xws
     return render(request, 'abfrage.html') # Change No.9n
-

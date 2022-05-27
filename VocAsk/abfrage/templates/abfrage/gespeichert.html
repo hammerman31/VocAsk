@@ -1,0 +1,24 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+{% for VocabularySet in savedVocabulary %}
+<div class="row">
+    <div class="col-md-12">
+        <input type="checkbox" id="checkbox" name="group[]">
+        <label for="checkbox">
+            {{ VocabularySet.title}}
+            {{ VocabularySet.vocEn }}
+            {{  VocabularySet.vocDe }}
+        </label>
+    </div>
+</div>
+{% endfor %}
+<script>
+    $('input[type="checkbox"]').on('change', function() {
+        $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+    });
+</script>
+
+{% endblock %}

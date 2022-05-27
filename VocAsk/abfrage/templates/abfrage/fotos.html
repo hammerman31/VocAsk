@@ -175,4 +175,9 @@
     {% csrf_token %}
     </div>
 </form>
+{% if user.is_authenticated %}
+<button>
+    <a href="/abfrage/gespeichert">gespeicherte Vokabels auswählen</a>
+</button>
+{%endif%}
 {% endblock %}

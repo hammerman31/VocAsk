@@ -7,6 +7,7 @@ from vocTransformer import vocTransformer
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from accounts.forms import SubmitVocabularySets
+from accounts.models import VocabularySets
 from django.contrib.auth.models import User
 #from forms import VocabularyForm
 
@@ -94,6 +95,12 @@ def abfrage(request):
         return render(request, 'abfrage.html')
 
 
+def gespeichert(request):
+    savedVocabularyData = VocabularySets.objects.filter(user=request.user)
+    savedVocabulary ={
+        "savedVocabulary": savedVocabularyData
+    }
+    return render(request, 'gespeichert.html', savedVocabulary)
 
 
 @csrf_exempt
@@ -131,3 +138,5 @@ def audio_data(request):
     
     #translation = translator.translate(text)xws
     return render(request, 'abfrage.html') # Change No.9n
+
+

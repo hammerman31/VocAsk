@@ -102,6 +102,16 @@ def gespeichert(request):
     }
     return render(request, 'gespeichert.html', savedVocabulary)
 
+@csrf_exempt
+def gespeichertZuAbfrage(request):
+    if request.method == 'POST':
+        chosenVocs = request.POST.getlist('group[]')
+        vocs = chosenVocs[0].splitlines()
+        vocsde = vocs[1]
+        vocsen = vocs[0]
+        messages.success(request, vocsde, extra_tags="de")
+        messages.success(request, vocsen, extra_tags="en")
+        return render(request, 'abfrage.html')
 
 @csrf_exempt
 def audio_data(request):

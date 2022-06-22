@@ -87,13 +87,13 @@ def abfrage(request):
             form.title = request.GET.get('title')
             form.vocEn = str(vocsen)
             form.vocDe = str(vocsde)
-            form.user = request.user
-            form.save()
+            if request.user.is_authenticated:
+                form.user = request.user
+                form.save()
         messages.success(request, vocsde, extra_tags="de")
         messages.success(request, vocsen, extra_tags="en")
         
         return render(request, 'abfrage.html')
-
 
 def gespeichert(request):
     savedVocabularyData = VocabularySets.objects.filter(user=request.user)

@@ -8,7 +8,6 @@ def VocabularyFormEn(vocList):
     "Expects a LIST of photo objects (ie. photo_sharing.models.photo)"
 
     fields = {}
-
     k = 0
     for id in vocList:
         id = str(id)

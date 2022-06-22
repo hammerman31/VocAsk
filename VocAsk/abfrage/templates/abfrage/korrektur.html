@@ -1,34 +1,63 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
+<h1>Korrektur</h1>
 
 <form action="/abfrage/abfrage" metod="POST">
-  {% for fields in formEn %}
-  <div class="row">
-      <div class="col-md-12">
-        {{fields}}
-      </div>
-    </div>
-  {% endfor %}
 
-  {% for fields in formDe %}
-  <div class="row">
-      <div class="col-md-12">
-        {{fields}}
+  <div class="center-div">
+    <div class="korrektur-box">
+      <div class="center-div">
+
+        <div class="textfeld-boxen">
+          <label>englische Vokabeln:</label>
+          {% for fields in formEn %}
+          <div class="row">
+              <div class="col-md-12">
+                {{fields}}
+              </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="textfeld-boxen">
+          <label>deutsche Vokabeln:</label>
+          {% for fields in formDe %}
+          <div class="row">
+              <div class="col-md-12">
+                {{fields}}
+              </div>
+          </div>
+          {% endfor %}
+        </div>
+      
       </div>
     </div>
-  {% endfor %}
+  </div>
 
   {% if user.is_authenticated %}
-  <label class="switch">
-    <input type="checkbox" onclick="displayTitleField()" id="switch">
-    <span class="slider round"></span>
-  </label>
-  {% for fields in titleField %}
-  <div id="titleField" style="display:none">
-      {{fields}}
+
+  <div class="center-div">
+
+    <div>
+      <label>Speichern:</label>
+      <label class="switch">
+        <input type="checkbox" onclick="displayTitleField()" id="switch">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div>
+      {% for fields in titleField %}
+      <div id="titleField" style="display:none">
+          <label>Titel:</label>
+          {{fields}}
+      </div>
+      {% endfor %}
+    </div>
+
   </div>
-  {% endfor %}
+
   <script>
     function displayTitleField() {
       // Get the checkbox
@@ -44,9 +73,14 @@
       }
     }
   </script>
+
   {%endif%}
 
-  <input type="submit" value="WEITER" id="submitButton" onclick="submit()">
+  <div class="center-div">
+    <input type="submit" value="WEITER" id="senden" onclick="submit()" class="submit-input">
+    <button for="senden" id="weiter_btn" class="submit-button">WEITER</button>
+  </div>
+
   <script>
     function submit() {
       var checkBox = document.getElementById("switch");
@@ -57,6 +91,7 @@
       button.form.submit();
     }
   </script>
+
 </form>
 
 {% endblock %}

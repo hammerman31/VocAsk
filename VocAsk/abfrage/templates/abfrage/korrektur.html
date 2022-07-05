@@ -47,10 +47,10 @@
       </label>
     </div>
 
-    <div>
+    <div id="title-box" style="display:none">
       {% for fields in titleField %}
-      <div id="titleField" style="display:none">
-          <label>Titel:</label>
+      <label>Titel:</label>
+      <div id="titleField">
           {{fields}}
       </div>
       {% endfor %}
@@ -63,13 +63,13 @@
       // Get the checkbox
       var checkBox = document.getElementById("switch");
       // Get the output text
-      var titleField = document.getElementById("titleField");
+      var titleBox = document.getElementById("title-box");
 
       // If the checkbox is checked, display the output text
       if (checkBox.checked == true){
-        titleField.style.display = "block";
+        titleBox.style.display = "block";
       } else {
-        titleField.style.display = "none";
+        titleBox.style.display = "none";
       }
     }
   </script>
@@ -77,17 +77,17 @@
   {%endif%}
 
   <div class="center-div">
-    <input type="submit" value="WEITER" id="senden" onclick="submit()" class="submit-input">
-    <button for="senden" id="weiter_btn" class="submit-button">WEITER</button>
+    <input type="submit" value="WEITER" id="senden" class="submit-input">
+    <button for="senden" id="weiter_btn" class="submit-button" onclick="submit()">WEITER</button>
   </div>
 
   <script>
     function submit() {
       var checkBox = document.getElementById("switch");
       if (checkBox.checked == false){
-        document.getElementById("id_title").value = "!h4fd46rZMJ4zf&2hm3"
+        document.getElementById("titleField").value = "!h4fd46rZMJ4zf&2hm3"
       }
-      var button = document.getElementById('submitButton');
+      var button = document.getElementById('weiter_btn');
       button.form.submit();
     }
   </script>

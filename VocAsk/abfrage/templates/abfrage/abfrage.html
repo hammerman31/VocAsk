@@ -4,221 +4,224 @@
 
 <body onload="speak()">
     <script>
-    function speak() {
-        const utterance = new SpeechSynthesisUtterance("hallo ich bin de de sina, heute werde ich Sie abfragen, sprechen Sie bitte deutlich ins mikrofon, damit ich Sie verstehen kann")
-        window.speechSynthesis.speak(utterance)
-        alert("Erlaube uns bitte Zugriff auf dein Mikrofon, um dich abfragen zu lassen.")
-        navigator.mediaDevices.getUserMedia({ audio: true })
-      .then(function(stream) {
-        console.log('You let me use your mic!')
-      })
-      .catch(function(err) {
-        console.log('No mic for you!')
-      });
-      }
-      </script>
+        function speak() {
+            const utterance = new SpeechSynthesisUtterance("hallo ich bin de de sina, heute werde ich Sie abfragen, sprechen Sie bitte deutlich ins mikrofon, damit ich Sie verstehen kann")
+            window.speechSynthesis.speak(utterance)
+            alert("Erlaube uns bitte Zugriff auf dein Mikrofon, um dich abfragen zu lassen.")
+            navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(stream) {
+            console.log('You let me use your mic!')
+        })
+        .catch(function(err) {
+            console.log('No mic for you!')
+        });
+        }
+    </script>
+    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <section class="first">
-        <h1>Abfrage</h1>
-    </section>
-    <section class="second" id="bar">
+    
+    <h1>Abfrage</h1>
+    
+    <div class="center-div">
+        <section class="korrektur-box" id="bar">
+            <div class="center-div">
+
+                <div id='result' class='voc'>...</div>
         
-      <div id='result' class='voc'>...</div>
-  
-  
-  <div id= 'record' class='startbut'>
-      <button onclick="abfrage()" class="inputfiles" id="re">start</button>
-      <label class ="buttona" for="re">Abfrage starten</label>
-      <form action="/abfrage/audio_data"  method="POST">
-        {% csrf_token %}
-      
-      {% for message in messages %}
-      {%if "en" in message.tags %}
-        <section class="inputfiles" id="voclisten">
-            <ul   class="messages" >
-                <li  name='vocsena' id='vocsena' > {{ message }} </li>
-            </ul> 
-        </section>
-        {% endif %} 
-        {% endfor %}
+                <div id= 'record' class='startbut'>
 
-        {% for message in messages %}
-      {%if "de" in message.tags %}
-        <section class="inputfiles" id="voclistde">
-            <ul   class="messages" >
-                <li  name='vocsdea' id='vocsdea' > {{ message }} </li>
-            </ul> 
-        </section>
-        {% endif %} 
-        {% endfor %}
-
-        
-      </form>
-  
-
-  <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart(datalist) {
-      	
-          var data = google.visualization.arrayToDataTable(datalist);
-  
-          var options = {
-          chart: {
-          title: 'Verlauf',
-          },
-          chartArea: {
-              backgroundColor: '#525050',
-              top:0, 
-              left:0,
-              height:'100%',
-              width:'100%'
-              }
-              
-          };
-  
-          var chart = new google.visualization.AreaChart(document.getElementById('curve_chart'));
-          chart.draw(data, options);
-        }
-  
-function speakown(sentence) {
-    const utterance = new SpeechSynthesisUtterance(sentence)
-    window.speechSynthesis.speak(utterance)
-  }
-
-
-
-
-function startConverting()
-        {   
-            
-            return new Promise((resolve, reject) => {
-                var r=document.getElementById('result');
-                var spr=new webkitSpeechRecognition(); //Initialisation of web Kit
-                    spr.continuous=true; //True if continous conversion is needed, false to stop transalation when paused 
-                    spr.interimResults=false;
-                    spr.lang='en-IN'; // Set Input language
-                    spr.start(); //Start Recording the voice
-                var ftr='';
-            spr.onresult = function (event) {
-                 
+                    <button onclick="abfrage()" class="file-input" id="re">start</button>
+                    <label class ="upload-button" for="re">Abfrage starten</label>
+                    
+                    <form action="/abfrage/audio_data"  method="POST">
+                        {% csrf_token %}
                         
-                        var interimTranscripts='';
-                        for(var i=event.resultIndex;i<event.results.length;i++)
-                        {
-                            var transcript=event.results[i][0].transcript;
-                            transcript.replace("\n","<br>")
-                            if(event.results[i].isFinal){
-                                ftr+=transcript;
+                        {% for message in messages %}
+                        {%if "en" in message.tags %}
+                            <section class="file-input" id="voclisten">
+                                <ul   class="messages" >
+                                    <li  name='vocsena' id='vocsena' > {{ message }} </li>
+                                </ul> 
+                            </section>
+                        {% endif %} 
+                        {% endfor %}
+
+                        {% for message in messages %}
+                        {%if "de" in message.tags %}
+                            <section class="file-input" id="voclistde">
+                                <ul   class="messages" >
+                                    <li  name='vocsdea' id='vocsdea' > {{ message }} </li>
+                                </ul> 
+                            </section>
+                        {% endif %} 
+                        {% endfor %}
+
+                        
+                    </form>
+            
+                    <script type="text/javascript">
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart(datalist) {
+                            
+                            var data = google.visualization.arrayToDataTable(datalist);
+                    
+                            var options = {
+                            chart: {
+                            title: 'Verlauf',
+                            },
+                            chartArea: {
+                                backgroundColor: '#525050',
+                                top:0, 
+                                left:0,
+                                height:'100%',
+                                width:'100%'
+                                }
+                                
+                            };
+                    
+                            var chart = new google.visualization.AreaChart(document.getElementById('curve_chart'));
+                            chart.draw(data, options);
                             }
-                            else
-                            interimTranscripts+=transcript;
-                        };
-                        r.innerHTML=ftr +interimTranscripts ;
-                        resolve(ftr +interimTranscripts); // Resolve with the text value you need
-            };
-            spr.onerror = reject;
-        });  
-        }
+                    
+                        function speakown(sentence) {
+                            const utterance = new SpeechSynthesisUtterance(sentence)
+                            window.speechSynthesis.speak(utterance)
+                        }
 
+                        function startConverting() {   
+                                
+                            return new Promise((resolve, reject) => {
+                                var r=document.getElementById('result');
+                                var spr=new webkitSpeechRecognition(); //Initialisation of web Kit
+                                    spr.continuous=true; //True if continous conversion is needed, false to stop transalation when paused 
+                                    spr.interimResults=false;
+                                    spr.lang='en-IN'; // Set Input language
+                                    spr.start(); //Start Recording the voice
+                                var ftr='';
+                            spr.onresult = function (event) {            
+                                var interimTranscripts='';
+                                for(var i=event.resultIndex;i<event.results.length;i++)
+                                {
+                                    var transcript=event.results[i][0].transcript;
+                                    transcript.replace("\n","<br>")
+                                    if(event.results[i].isFinal){
+                                        ftr+=transcript;
+                                    }
+                                    else
+                                    interimTranscripts+=transcript;
+                                };
+                                r.innerHTML=ftr +interimTranscripts ;
+                                resolve(ftr +interimTranscripts); // Resolve with the text value you need
+                                };
+                                spr.onerror = reject;
+                            });  
+                            }
 
-async function abfrage() {
-    var voclisten = document.getElementById("voclisten").textContent;
-    voclisten = voclisten.split(",");
-    voclisten[0] = voclisten[0].substring(1);
-    voclisten[voclisten.length - 1] = voclisten[voclisten.length - 1].substring(
-    0,
-    voclisten[voclisten.length - 1].length - 1
-    );
-    voclisten.forEach((x, i) => {
-        voclisten[i] = voclisten[i].includes('"') ? voclisten[i].replaceAll('"', "").trim()
-        : voclisten[i].replaceAll("'", "").trim();
-    });
-    console.log(voclisten);
+                        async function abfrage() {
+                            var voclisten = document.getElementById("voclisten").textContent;
+                            voclisten = voclisten.split(",");
+                            voclisten[0] = voclisten[0].substring(1);
+                            voclisten[voclisten.length - 1] = voclisten[voclisten.length - 1].substring(
+                            0,
+                            voclisten[voclisten.length - 1].length - 1
+                            );
+                            voclisten.forEach((x, i) => {
+                                voclisten[i] = voclisten[i].includes('"') ? voclisten[i].replaceAll('"', "").trim()
+                                : voclisten[i].replaceAll("'", "").trim();
+                            });
+                            console.log(voclisten);
 
-    var voclistde = document.getElementById("voclistde").textContent;
-    voclistde = voclistde.split(",");
-    voclistde[0] = voclistde[0].substring(1);
-    voclistde[voclistde.length - 1] = voclistde[voclistde.length - 1].substring(
-    0,
-    voclistde[voclistde.length - 1].length - 1
-    );
-    voclistde.forEach((x, i) => {
-        voclistde[i] = voclistde[i].includes('"') ? voclistde[i].replaceAll('"', "").trim()
-        : voclistde[i].replaceAll("'", "").trim();
-    });
-    console.log(voclistde);
-    if (voclistde.length == voclisten.length) {
-        var counter = 0;
-        var dividend = 0;
-        var datalist = [["Runden", "Richtige Vokabeln"],[0, 0]];
-        drawChart(datalist);
-        for (var i = 0; i < voclistde.length; i++) {
-            var dividend = dividend+1;
-            speakown("was heißt"+ voclistde[i]);
-            const uservoc = await startConverting();
-            var uservoca = uservoc.toLowerCase();
-            var paragraph = document.getElementById("pa");
-            var paragrapha = document.getElementById("rof");
-            var paragraphb = document.getElementById("rvoc");
-            if(voclisten[i].toLowerCase().includes(uservoca) || voclisten[i].toLowerCase()==uservoca) {
-                var counter = counter+1;
-                var proz = Math.round(counter/dividend*100);
-                var text = " +1 ";
-                datalist.push([i, 1]);
-                speakown("Sehr gut, das war richtig")
-            }
-            else {
-                var proz = Math.round(counter/dividend*100);
-                var text = " -1 ";
-                datalist.push([i, 0]);
-                speakown(uservoc+" ist leider falsch") 
-            }
-            var rvoc = voclisten[i];
-            paragraphb.innerHTML = paragraphb.innerHTML.replace(paragraphb.textContent, rvoc);
-            paragraph.innerHTML = paragraph.innerHTML.replace(paragraph.textContent, proz+"%");
-            paragrapha.innerHTML = paragrapha.innerHTML.replace(paragrapha.textContent, text);
-            drawChart(datalist);
-        }
-        speakown("Die Abfrage ist beendet. Sie hatten"+proz.toString()+" Prozent richtig. Üben Sie die falschen Vokabeln noch.")
-    }
-    else {
-        document.location.href = "afterStart"
-        alert("Leider ist uns ein Fehler unterlaufen. )`: Stellen Sie bitte sicher, dass die Anzahl der deutschen und englischen Vokabeln die gleiche ist. Wenn dies bereits der Fall ist, dann schreiben Sie bitte der support Email, die Sie unter Hilfe finden. Vielen Dank für Ihre Geduld.")
-    }
-}
-           
-  </script>
-</div>
+                            var voclistde = document.getElementById("voclistde").textContent;
+                            voclistde = voclistde.split(",");
+                            voclistde[0] = voclistde[0].substring(1);
+                            voclistde[voclistde.length - 1] = voclistde[voclistde.length - 1].substring(
+                            0,
+                            voclistde[voclistde.length - 1].length - 1
+                            );
+                            voclistde.forEach((x, i) => {
+                                voclistde[i] = voclistde[i].includes('"') ? voclistde[i].replaceAll('"', "").trim()
+                                : voclistde[i].replaceAll("'", "").trim();
+                            });
+                            console.log(voclistde);
+                            if (voclistde.length == voclisten.length) {
+                                var counter = 0;
+                                var dividend = 0;
+                                var datalist = [["Runden", "Richtige Vokabeln"],[0, 0]];
+                                drawChart(datalist);
+                                for (var i = 0; i < voclistde.length; i++) {
+                                    var dividend = dividend+1;
+                                    speakown("was heißt"+ voclistde[i]);
+                                    const uservoc = await startConverting();
+                                    var uservoca = uservoc.toLowerCase();
+                                    var paragraph = document.getElementById("pa");
+                                    var paragrapha = document.getElementById("rof");
+                                    var paragraphb = document.getElementById("rvoc");
+                                    if(voclisten[i].toLowerCase().includes(uservoca) || voclisten[i].toLowerCase()==uservoca) {
+                                        var counter = counter+1;
+                                        var proz = Math.round(counter/dividend*100);
+                                        var text = " +1 ";
+                                        datalist.push([i, 1]);
+                                        speakown("Sehr gut, das war richtig")
+                                    }
+                                    else {
+                                        var proz = Math.round(counter/dividend*100);
+                                        var text = " -1 ";
+                                        datalist.push([i, 0]);
+                                        speakown(uservoc+" ist leider falsch") 
+                                    }
+                                    var rvoc = voclisten[i];
+                                    paragraphb.innerHTML = paragraphb.innerHTML.replace(paragraphb.textContent, rvoc);
+                                    paragraph.innerHTML = paragraph.innerHTML.replace(paragraph.textContent, proz+"%");
+                                    paragrapha.innerHTML = paragrapha.innerHTML.replace(paragrapha.textContent, text);
+                                    drawChart(datalist);
+                                }
+                                speakown("Die Abfrage ist beendet. Sie hatten"+proz.toString()+" Prozent richtig. Üben Sie die falschen Vokabeln noch.")
+                            }
+                            else {
+                                document.location.href = "afterStart"
+                                alert("Leider ist uns ein Fehler unterlaufen. )`: Stellen Sie bitte sicher, dass die Anzahl der deutschen und englischen Vokabeln die gleiche ist. Wenn dies bereits der Fall ist, dann schreiben Sie bitte der support Email, die Sie unter Hilfe finden. Vielen Dank für Ihre Geduld.")
+                            }
+                    }
+                            
+                    </script>
+                </div>
 
-    </section>
-    <section class="first1">
-        <h2>Statistiken</h2>
-    </section>
-    
-    <section class="secondone" >
-        
-        <section class="simple">
-            <section class="übers">Richtig</section>
-            <section class="übersone" id="pa">0%</section>
+            </div>
         </section>
+    </div>
 
-        <section class="simple">
-            <section class="übers">Verlauf</section>
-            <section id="curve_chart" class="übersoneb" style="width: 210px; height: 105px;"></section>
+    <h2>Statistiken</h2>
+
+    <div class="center-div">
+        <section class="korrektur-box">
+            <div class="center-div" >
+                
+                <section class="statistiken-innen-box">
+                    <label class="übers">Richtig</label>
+                    <section class="übersone" id="pa">0%</section>
+                </section>
+
+                <section class="statistiken-innen-box">
+                    <label class="übers">Verlauf</label>
+                    <section id="curve_chart" class="übersoneb" style="width: 210px; height: 105px;"></section>
+                </section>
+                
+                <section class="statistiken-innen-box">
+                    <label class="übers">Punkte</label>
+                    <section class="übersone" id="rof">~</section>
+                </section>
+
+                <section class="statistiken-innen-box">
+                    <label class="übers">letzte Vokabel</label>
+                    <section class="übersonea" id="rvoc">~</section>
+                </section>
+
+            </div>
         </section>
-        
-        <section class="simple">
-            <section class="übers">Punkte</section>
-            <section class="übersone" id="rof">~</section>
-        </section>
-        <section class="simple">
-            <section class="übers">letzte Vokabel</section>
-            <section class="übersonea" id="rvoc">~</section>
-        </section>
-    </section>
-    
+    </div>
+
     <section>
         <div class="container">
             <a href="/abfrage/fotos" class="container">

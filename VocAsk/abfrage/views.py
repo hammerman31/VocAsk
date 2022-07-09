@@ -72,28 +72,31 @@ def abfrage(request):
             for x in range(len(formEn.cleaned_data)):
                 vocsen.append(formDe.cleaned_data[str(x)+'_de'])
                 vocsde.append(formEn.cleaned_data[str(x)+'_en'])
-        print(vocsde)
+        print("Yaaaaay")
 
     else:
         vocsLen = len(request.GET)/2
-        vocsen = []
-        vocsde = []
-        for x in range(1, int(vocsLen+1)):
-            vocsde.append(request.GET.get(str(x)+'_de', ''))
-            vocsen.append(request.GET.get(str(x)+'_en', ''))
-        if request.GET.get('title') != '':
-            form1 = SubmitVocabularySets()
-            form = form1.save(commit=False)
-            form.title = request.GET.get('title')
-            form.vocEn = str(vocsen)
-            form.vocDe = str(vocsde)
-            if request.user.is_authenticated:
-                form.user = request.user
-                form.save()
-        messages.success(request, vocsde, extra_tags="de")
-        messages.success(request, vocsen, extra_tags="en")
-        
-        return render(request, 'abfrage.html')
+        if(vocsLen != 0.0):
+            vocsen = []
+            vocsde = []
+            for x in range(1, int(vocsLen+1)):
+                vocsde.append(request.GET.get(str(x)+'_de', ''))
+                vocsen.append(request.GET.get(str(x)+'_en', ''))
+            if request.GET.get('title') != '':
+                form1 = SubmitVocabularySets()
+                form = form1.save(commit=False)
+                form.title = request.GET.get('title')
+                form.vocEn = str(vocsen)
+                form.vocDe = str(vocsde)
+                if request.user.is_authenticated:
+                    form.user = request.user
+                    form.save()
+            messages.success(request, vocsde, extra_tags="de")
+            messages.success(request, vocsen, extra_tags="en")
+            
+            return render(request, 'abfrage.html')
+        else:
+            return render(request, 'fehler.html')
 
 def gespeichert(request):
     savedVocabularyData = VocabularySets.objects.filter(user=request.user)

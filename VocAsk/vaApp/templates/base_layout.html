@@ -15,19 +15,30 @@
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_korrektur.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_abfrage.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_gespeichert.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <a href="/" class="logo">
-        <img width="200px" height="85px" src="{% static 'img/written_logo.png' %}" alt="VocAsk Logo">
-    </a>
-    <div class="menubar">
-        <nav>
-            <ul class="linkslist">
-            <li class="item"><a class="menulinks" href="/">home</a></li>
-            <li class="item"><a class="menulinks" href="/about">about</a></li>
-            <li class="item"><a class="menulinks" href="/anleitung">anleitung</a></li>
-            </ul>
-        </nav>
+    <div class="topnav" id="myTopnav">
+        <a href="/" >
+            <img width="200px" height="85px" src="{% static 'img/written_logo.png' %}" alt="VocAsk Logo">
+        </a>
+        <a class="menulinks" href="/">home</a>
+        <a class="menulinks" href="/about">about</a>
+        <a class="menulinks" href="/anleitung">anleitung</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
     </div>
+    <script type="text/javascript">
+        function myFunction() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topnav") {
+            x.className += " responsive";
+          } else {
+            x.className = "topnav";
+          }
+        }
+    </script>
     {% if user.is_authenticated %}
     <div class="menubuttons">
         <nav>
@@ -57,6 +68,7 @@
         </nav>
     </div>
     {%endif%}
+    <p class="spacer"></p>
 </head>
 <body>
     {% block content %}

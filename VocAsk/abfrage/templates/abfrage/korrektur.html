@@ -7,9 +7,9 @@
 <form action="/abfrage/abfrage" metod="POST">
 
   <div class="center-div">
-    <div class="korrektur-box">
-      <div class="center-div">
-
+    <div class="center-div">
+      <div class="korrektur-box">
+        
         <div class="textfeld-boxen">
           <label>englische Vokabeln:</label>
           {% for fields in formEn %}
@@ -39,24 +39,26 @@
   {% if user.is_authenticated %}
 
   <div class="center-div">
+    <div class="checkbox-box">
+      <div class="center-div">
+        <div class="inside-korrektur-box">
+          <label>Speichern:</label>
+          <label class="switch">
+            <input type="checkbox" onclick="displayTitleField()" id="switch">
+            <span class="slider round"></span>
+          </label>
+        </div>
 
-    <div>
-      <label>Speichern:</label>
-      <label class="switch">
-        <input type="checkbox" onclick="displayTitleField()" id="switch">
-        <span class="slider round"></span>
-      </label>
-    </div>
-
-    <div id="title-box" style="display:none">
-      {% for fields in titleField %}
-      <label>Titel:</label>
-      <div id="titleField">
-          {{fields}}
+        <div id="title-box" style="display:none">
+          {% for fields in titleField %}
+          <label>Titel:</label>
+          <div id="titleField">
+              {{fields}}
+          </div>
+          {% endfor %}
+        </div>
       </div>
-      {% endfor %}
     </div>
-
   </div>
 
   <script>

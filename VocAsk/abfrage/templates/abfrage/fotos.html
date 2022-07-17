@@ -22,72 +22,76 @@
 <form id="imgForm" method="post">
 
     <div class="center-div">
-        <section class="upload-box" >
-
-            <input class="file-input" type="file" id="files" name="imagede">
-            <label class="upload-button" for="files" id="debtn">deutsche Vokabeln</label>
-            <p></p>
-            <output class="image" id="list" style="border-radius:30px"></output>
-            <input type="hidden" name="txt_voc_de" id="txt_voc_de" value=""></input>
-            <script>
-            
-                if (window.FileReader) {
-                function handleFileSelect(evt) {
-                var files = evt.target.files;
-                var f = files[0];
-                var reader = new FileReader();
-                
-                    reader.onload = (function(theFile) {
-                    return function(e) {
-                        document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" class="img" width="200", height=280 style="border-radius:12px;" id="imgde"/>'].join('');
-                    };
-                    })(f);
-            
-                    reader.readAsDataURL(f);
-                }
-                
-                } else {
-                alert('This browser does not support FileReader');
-            }
-            
-                document.getElementById('files').addEventListener('change', handleFileSelect, false);
-                
-                
-            </script>
-        </section>
-        <section class="upload-box">
-            <input class="file-input" type="file" id="filesa" name="imageen">
-            <label class="upload-button" for="filesa" id="enbtn">englische Vokabeln</label>
-            <p></p>
-            <output class="image" id="lista"></output>
-            <input type="hidden" name="txt_voc_en" id="txt_voc_en" value=""></input>
-            
-            <script>
-            
-                if (window.FileReader) {
-                function handleFileSelect(evt) {
-                var filesa = evt.target.files;
-                var f = filesa[0];
-                var reader = new FileReader();
-                
-                    reader.onload = (function(theFile) {
-                    return function(e) {
-                        document.getElementById('lista').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" class="img" width="200", height=280, style="border-radius:12px" id="imgen"/>'].join('');
-                    };
-                    })(f);
-            
-                    reader.readAsDataURL(f);
+        <div class="upload-boxen">
+            <div class="upload-box-column">
+                <div class="upload-box" >
+                    <input class="file-input" type="file" id="files" name="imagede">
+                    <label class="upload-button" for="files" id="debtn">deutsche Vokabeln</label>
+                    <p></p>
+                    <output class="image" id="list" style="border-radius:30px"></output>
+                    <input type="hidden" name="txt_voc_de" id="txt_voc_de" value=""></input>
+                    <script>
                     
-                }
-                } else {
-                alert('This browser does not support FileReader');
-            }
-            
-                document.getElementById('filesa').addEventListener('change', handleFileSelect, false);
-        
+                        if (window.FileReader) {
+                        function handleFileSelect(evt) {
+                        var files = evt.target.files;
+                        var f = files[0];
+                        var reader = new FileReader();
+                        
+                            reader.onload = (function(theFile) {
+                            return function(e) {
+                                document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" class="img" width="200", height=280 style="border-radius:12px;" id="imgde"/>'].join('');
+                            };
+                            })(f);
+                    
+                            reader.readAsDataURL(f);
+                        }
+                        
+                        } else {
+                        alert('This browser does not support FileReader');
+                    }
+                    
+                        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                        
+                        
+                    </script>
+                </div>
+            </div>
+            <div class="upload-box-column">
+                <div class="upload-box">
+                    <input class="file-input" type="file" id="filesa" name="imageen">
+                    <label class="upload-button" for="filesa" id="enbtn">englische Vokabeln</label>
+                    <p></p>
+                    <output class="image" id="lista"></output>
+                    <input type="hidden" name="txt_voc_en" id="txt_voc_en" value=""></input>
+                    <script>
+                    
+                        if (window.FileReader) {
+                        function handleFileSelect(evt) {
+                        var filesa = evt.target.files;
+                        var f = filesa[0];
+                        var reader = new FileReader();
+                        
+                            reader.onload = (function(theFile) {
+                            return function(e) {
+                                document.getElementById('lista').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" class="img" width="200", height=280, style="border-radius:12px" id="imgen"/>'].join('');
+                            };
+                            })(f);
+                    
+                            reader.readAsDataURL(f);
+                            
+                        }
+                        } else {
+                        alert('This browser does not support FileReader');
+                    }
+                    
+                        document.getElementById('filesa').addEventListener('change', handleFileSelect, false);
                 
-            </script>
-        </section>
+                        
+                    </script>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="center-div">

@@ -9,11 +9,11 @@
 }
 
 .login-box {
-  position: absolute;
+  
   top: 50%;
   left: 50%;
   width: 400px;
-  padding: 40px;
+  padding: 20px;
   transform: translate(-50%, -50%);
   background: rgba(91, 206, 194, 0.726);
   box-sizing: border-box;
@@ -87,4 +87,8 @@ br{
   font-size: 13px;
   font-weight: 600;
   margin: 0px 0;
+}
+
+.h-accounts{
+  margin-bottom: 15px;
 }

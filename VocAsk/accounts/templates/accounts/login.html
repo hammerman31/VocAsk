@@ -1,12 +1,18 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<div class="login-box">
-    <h2>Log in</h2>
-    <form class="site-form" action="{% url 'accounts:login' %}" method="post">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" class="form_button" value="Login">
-    </form>
+<div class="center-div">
+    <div class="korrektur-box">
+        <div class="center-div">
+            <form class="site-form" action="{% url 'accounts:login' %}" method="post">
+                <div class="center-div">
+                    <h2 class="h-accounts">Log in</h2>
+                </div>
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" class="form_button" value="Login">
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -1,12 +1,18 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<div class="login-box">
-    <h2>Signup</h2>
-    <form class="site-form" action="/accounts/signup/" method="post">
-        {% csrf_token %}
-        {{form}}
-        <input class="form_button" type="submit" value="Signup">
-    </form>
+<div class="center-div">
+    <div class="korrektur-box">
+        <div class="center-div">
+            <form class="site-form" action="/accounts/signup/" method="post">
+                <div class="center-div">
+                    <h2 class="h-accounts">Signup</h2>
+                </div>
+                {% csrf_token %}
+                {{form}}
+                <input class="form_button" type="submit" value="Signup">
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -28,7 +28,7 @@
   color: #fff;
   text-align: center;
 }
-input[type=text], input[type=password]{
+input[type=text], input[type=password], input[type=email], textarea{
   padding:10px;
   border:0;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
@@ -92,3 +92,4 @@ br{
 .h-accounts{
   margin-bottom: 15px;
 }
+

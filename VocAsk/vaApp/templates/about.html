@@ -4,4 +4,54 @@
 <div class="center-div">
     <h1>About</h1>
 </div>
+<div class="center-div">
+    <div class="about-container">
+        <div class="center-div">
+            <div class="korrektur-box">
+                <p>Hi,</p>
+                <p>
+                    ich heiße <b>Danilo Scholz</b> und
+                    bin der Entwickler dieser Webseite. 
+                    VocAsk entstand im Rahmen meiner wissenschaftlichen
+                    Seminararbeit aus der Informatik, auf dem Erasmus
+                    Grasser Gymnasium in München.
+                </p>
+            </div>
+        </div>
+        <div class="center-div">
+            <div class="korrektur-box">
+                <p>
+                    Wenn du mehr über die Funktionsweise dieser Webseite erfahren willst, 
+                    dann lade dir hier meine Seminar Arbeit herunter.
+                </p>
+                <a href="https://www.gesetze-im-internet.de/gg/GG.pdf" download="VocAsk Seminarbeit">
+                    <button class="download-button"> 
+                        <div class="download-circle">
+                            <div class="download-center">
+                                <i class="fa fa-download"></i>
+                            </div>
+                        </div>
+                        Download
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="center-div">
+            <div class="korrektur-box">
+                <p>
+                    Wenn du mich kontaktieren möchtest, dann schick mir eine Email unter 
+                    <b>VocAskContact@gmail.com</b>
+                    oder schreib mir direkt hier.
+                </p>
+                <div class="about-email-container">
+                    <form method="post">
+                        {% csrf_token %}
+                            {{form.as_p}}
+                            <button type="submit" class="email-button">Senden</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

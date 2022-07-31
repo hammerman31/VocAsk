@@ -71,9 +71,76 @@
     </div>
     {%endif%}
     <p class="spacer"></p>
+    <button onclick="topFunction()" id="scroll-top-button" >
+
+            <i class="fa fa-arrow-up"></i>
+    
+    </button>
+    <script>
+        //Get the button:
+        mybutton = document.getElementById("scroll-top-button");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
 </head>
 <body>
     {% block content %}
     {% endblock %}
 </body>
+<footer>
+    <div class="center-div">
+        <div class="footer-outer-box">
+
+            <img class="footer-logo" width="247px" height="85px" src="{% static 'img/written_logo_white.png' %}" alt="VocAsk Logo">
+
+            <div class="abfrage-box">
+                
+                <div class="footer-box">
+                    <b class="footer-headline">Zu VocAsk</b>
+                    <a class="footer-link" href="/">Home</a>
+                    <a class="footer-link" href="/about">About</a>
+                    <a class="footer-link" href="/anleitung">Anleitung</a>
+                </div>
+                <div class="footer-box">
+                    <b class="footer-headline">Kontakt</b>
+                    <a class="footer-link" href="/about">About</a>
+                </div>
+                <div class="footer-box">
+                    <b class="footer-headline">Gesetzliches</b>
+                    <a class="footer-link" href="/accounts/login">Impressum</a>
+                    <a class="footer-link" href="/accounts/signup">Datenschutz Erklärung</a>
+                </div>
+                <div class="footer-box">
+                    <b class="footer-headline">Mein Account</b>
+                    <a class="footer-link" href="/accounts/login">Login</a>
+                    <a class="footer-link" href="/accounts/signup">Signup</a>
+                </div>
+
+            </div>
+            <div class="copyright-outer-box">
+                <hr class="footer-line">
+                <div class="copyright-box">
+                    &copy; VocAsk by Danilo Scholz
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+</footer>
 </html>

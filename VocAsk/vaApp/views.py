@@ -9,6 +9,9 @@ from django.core.mail import send_mail, BadHeaderError
 def index(request):
     return render(request, 'index.html')
 
+def datenschutz(request):
+    return render(request, 'datenschutz.html')
+
 def about(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)

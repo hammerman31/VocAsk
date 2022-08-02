@@ -8,9 +8,15 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_base_layout.css' %}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_switch_buttons.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/switch_button.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/download_button.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/form_button.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/upload_button.css' %}">
+
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_accounts.css' %}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_big_buttons.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/menu.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/start_button.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/access_button.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_basics.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_fotos.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_korrektur.css' %}">
@@ -48,7 +54,7 @@
                 <li>
                     <form class="logout-link" action="/accounts/logout/" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="button_small">Logout</button>
+                        <button type="submit" class="access-button">Logout</button>
                     </form>
                 </li>
             </ul>
@@ -60,10 +66,10 @@
             <ul>
                 <li>
                     <a href="/accounts/login" style="text-decoration: none;">
-                        <button type="submit" class="button_small">Login</button>
+                        <button type="submit" class="access-button">Login</button>
                     </a>
                     <a href="/accounts/signup" style="text-decoration: none;">
-                        <button type="submit" class="button_small">Signup</button>
+                        <button type="submit" class="access-button">Signup</button>
                     </a>
                 </li>
             </ul>

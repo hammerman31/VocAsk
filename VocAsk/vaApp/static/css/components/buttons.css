@@ -1,0 +1,453 @@
+/* scroll-top-button is used in base_layout.html for scrolling up*/
+
+#scroll-top-button {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgba(79,209,197,.64); /* Set a background color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 1000px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    height: 50px;
+    width: 50px;
+}
+  
+#scroll-top-button:hover {
+    background-color: rgba(21, 109, 100, 0.64); /* Add a dark-grey background on hover */
+}
+
+/* access-button is used in base_layout.html for logging in, signing up or signing out*/
+
+.access-button {
+    text-align: center;
+    min-width: 80px;
+    min-height: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.9px;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding-top: 7px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 15px;
+    }
+.access-button::after {
+    content: '';
+    border-radius: 100%;
+    border: none;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+.access-button::before {
+    content: '';
+    border-radius: 1000px;
+    min-width: calc(65px + 12px);
+    min-height: calc(17px + 12px);
+    border: 6px solid #00FFCB;
+    box-shadow: 0 0 60px rgba(0,255,203,.64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+    }
+.access-button:hover, .access-button:focus {
+    color: #313133;
+    transform: translateY(-6px);
+    }
+
+.access-button:hover::before, .access-button:focus::before {
+    opacity: 1;
+    }
+.access-button:hover::after, .access-button:focus::after {
+    animation: none;
+    display: none;
+    }
+
+/* download-button is used in about.html for downloading files */
+.download-button {
+    background-color: rgba(79,209,197,.64);
+    border: none;
+    border-radius: 1000px;
+    color: #313133;
+    height: 40px;
+    width: 170px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    padding-right: 23px;
+    margin-top: 15px;
+  }
+  .download-button:hover{
+    background-color: rgba(21, 109, 100, 0.64);
+  }
+  .download-circle{
+    height: 40px;
+    width: 40px;
+    background-color: rgba(21, 109, 100, 0.64);
+    border-radius: 1000px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  .download-center{
+    margin-top: 10px;
+  }
+/* form-button is used in about.html, login.html, signup.html for submitting forms*/
+.form-button{
+    background-color: rgba(79,209,197,.64);
+    border: none;
+    border-radius: 1000px;
+    color: #313133;
+    height: 40px;
+    width: 100px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    margin-top: 15px;
+    text-align: center;
+    padding-top: 5px;
+  }
+  .form-button:hover{
+    background-color: rgba(21, 109, 100, 0.64);
+  }
+/* start-button is used in index.html for starting interrogation process*/
+.start-button {
+    min-width: 315px;
+    min-height: 80px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    }
+
+.start-button::before {
+    content: '';
+    border-radius: 1000px;
+    min-width: calc(300px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid #00FFCB;
+    box-shadow: 0 0 60px rgba(0,255,203,.64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+    }
+
+.start-button:hover, .start-button:focus {
+    color: #313133;
+    transform: translateY(-6px);
+    }
+
+.start-button:hover::before, .start-button:focus::before {
+    opacity: 1;
+    }
+
+.start-button::after {
+    content: '';
+    width: 30px; height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00FFCB;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+    }
+
+.start-button:hover::after, .start-button:focus::after {
+    animation: none;
+    display: none;
+    }
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+    }
+    
+.start-button-box {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+}
+/* switch-button is used in korrektur.html for optional function use*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+/* upload-button is used in fotos.html for uploading images*/
+.upload-button {
+    background-color: rgba(79,209,197,.64);
+    border: none;
+    border-radius: 1000px;
+    color: #313133;
+    height: 40px;
+    width: 240px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    padding-right: 5px;
+    margin-top: 5px;
+    margin-right: 0;
+    margin-bottom:15px;
+  }
+  .upload-button:hover{
+    background-color: rgba(21, 109, 100, 0.64);
+  }
+  .upload-circle{
+    height: 40px;
+    width: 40px;
+    background-color: rgba(21, 109, 100, 0.64);
+    border-radius: 1000px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  .upload-center{
+    margin-top: 10px;
+    margin-left: 13px;
+  }
+
+
+/* submit-button is used in fotos.html, korrektur.html, abfrage.html for submitting to next page*/
+  .submit-button {
+    min-width: 315px;
+    min-height: 80px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    }
+
+.submit-button::before {
+    content: '';
+    border-radius: 1000px;
+    min-width: calc(300px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid #00FFCB;
+    box-shadow: 0 0 60px rgba(0,255,203,.64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+    }
+
+.submit-button:hover, .submit-button:focus {
+    color: #313133;
+    transform: translateY(-6px);
+    }
+
+.submit-button:hover::before, .submit-button:focus::before {
+    opacity: 1;
+    }
+
+
+.submit-button:hover::after, .submit-button:focus::after {
+    animation: none;
+    display: none;
+    }
+
+/* checkbox is a type of button used in gespeichert.html for choosing one of multiple vocabulary sets */
+  /* Basic styling */
+
+[type=checkbox] {
+  width: 2rem;
+  height: 2rem;
+  color: dodgerblue;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  outline: 0;
+  flex-grow: 0;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  transition: background 300ms;
+  cursor: pointer;
+}
+
+
+/* Pseudo element for check styling */
+
+[type=checkbox]::before {
+  content: "";
+  color: transparent;
+  display: block;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 0;
+  background-color: rgba(168, 233, 226, 0.726);
+  background-size: contain;
+  box-shadow: inset 0 0 0 1px rgba(168, 233, 226, 0.726);
+}
+
+
+/* Checked */
+
+[type=checkbox]:checked {
+  background-color: currentcolor;
+}
+
+[type=checkbox]:checked::before {
+  box-shadow: none;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
+}
+
+
+/* Disabled */
+
+[type=checkbox]:disabled {
+  background-color: rgba(168, 233, 226, 0.726);
+  opacity: 0.84;
+  cursor: not-allowed;
+}
+
+
+/* IE */
+
+[type=checkbox]::-ms-check {
+  content: "";
+  color: transparent;
+  display: block;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 0;
+  background-color: transparent;
+  background-size: contain;
+  box-shadow: inset 0 0 0 1px rgba(168, 233, 226, 0.726);
+}
+
+[type=checkbox]:checked::-ms-check {
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
+}

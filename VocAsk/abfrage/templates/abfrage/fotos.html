@@ -11,7 +11,7 @@
 {% if user.is_authenticated %}
 <div class="center-div">
     <a href="/abfrage/gespeichert" style="text-decoration: none;">
-        <button class="upload-button">gespeicherte Vokabeln auswählen</button>
+        <button class="upload-button">gespeicherte Vokabeln</button>
     </a>
 </div>
 {%endif%}
@@ -19,8 +19,10 @@
 <div type="hidden" id="loader"></div>
 <div type="hidden" id="dimmer"></div>
 
-<form id="imgForm" method="post">
 
+
+<form id="imgForm" method="post">
+    
     <div class="center-div">
         <div class="upload-boxen">
             <div class="upload-box-column">

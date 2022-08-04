@@ -4,9 +4,9 @@
 <div class="center-div">
     <div class="korrektur-box">
         <div class="center-div">
-            <form class="site-form" action="{% url 'accounts:login' %}" method="post">
+            <form class="access-form" action="{% url 'accounts:login' %}" method="post">
                 <div class="center-div">
-                    <h2 class="h-accounts">Log in</h2>
+                    <h2 class="access-h">Log in</h2>
                 </div>
                 {% csrf_token %}
                 {{form}}

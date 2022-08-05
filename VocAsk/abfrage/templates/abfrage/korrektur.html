@@ -8,12 +8,12 @@
 
   <div class="center-div">
     <div class="center-div">
-      <div class="korrektur-box">
+      <div class="standard-box screen-adaptation">
         
-        <div class="textfeld-boxen">
+        <div class="inside-standard-box">
           <label>englische Vokabeln:</label>
           {% for fields in formEn %}
-          <div class="row">
+          <div style="padding:10px;">
               <div class="col-md-12">
                 {{fields}}
               </div>
@@ -21,10 +21,10 @@
           {% endfor %}
         </div>
 
-        <div class="textfeld-boxen">
+        <div class="inside-standard-box">
           <label>deutsche Vokabeln:</label>
           {% for fields in formDe %}
-          <div class="row">
+          <div style="padding:10px;">
               <div class="col-md-12">
                 {{fields}}
               </div>
@@ -39,9 +39,9 @@
   {% if user.is_authenticated %}
 
   <div class="center-div">
-    <div class="checkbox-box">
+    <div class="standard-box">
       <div class="center-div">
-        <div class="inside-korrektur-box">
+        <div>
           <label>Speichern:</label>
           <label class="switch">
             <input type="checkbox" onclick="displayTitleField()" id="switch">
@@ -49,7 +49,7 @@
           </label>
         </div>
 
-        <div id="title-box" style="display:none">
+        <div id="title-box" style="margin-left:20px; display:none">
           {% for fields in titleField %}
           <label>Titel:</label>
           <div id="titleField">
@@ -80,7 +80,7 @@
   {%endif%}
 
   <div class="center-div">
-    <input type="submit" value="WEITER" id="senden" class="submit-input">
+    <input type="submit" value="WEITER" id="senden" class="hide">
     <button for="senden" id="weiter_btn" class="outside-box-button submit-button" onclick="submit()">WEITER</button>
   </div>
 

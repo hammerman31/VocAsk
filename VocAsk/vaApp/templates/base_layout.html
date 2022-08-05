@@ -7,11 +7,11 @@
     <title>VocAsk</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+    
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/base_layout.css' %}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/index.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/page_specific_layout.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/boxes.css' %}">
-
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_accounts.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/style_basics.css' %}">
     
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/outside_box_buttons.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/scroll_top_button.css' %}">
@@ -19,12 +19,6 @@
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/checkbox_button.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/inside_box_buttons.css' %}">
     
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_basics.css' %}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_fotos.css' %}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_korrektur.css' %}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_abfrage.css' %}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_gespeichert.css' %}">
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_about.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -116,7 +110,8 @@
 
             <img class="footer-logo" width="247px" height="85px" src="{% static 'img/written_logo_white.png' %}" alt="VocAsk Logo">
 
-            <div class="abfrage-box">
+            
+            <div class="standard-box" >
                 
                 <div class="footer-box">
                     <b class="footer-headline">Zu VocAsk</b>

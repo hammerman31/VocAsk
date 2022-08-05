@@ -11,7 +11,7 @@
 {% if user.is_authenticated %}
 <div class="center-div">
     <a href="/abfrage/gespeichert" style="text-decoration: none;">
-        <button class="upload-button">gespeicherte Vokabeln</button>
+        <button class="inside-box-button upload-button">gespeicherte Vokabeln</button>
     </a>
 </div>
 {%endif%}
@@ -24,10 +24,10 @@
 <form id="imgForm" method="post">
     
     <div class="center-div">
-        <div class="upload-boxen">
+        <div class="outside-upload-box">
             <div class="upload-box-column">
                 <div class="upload-box" >
-                    <input class="file-input" type="file" id="files" name="imagede">
+                    <input class="hide" type="file" id="files" name="imagede">
                     <label class="inside-box-button upload-button" for="files" id="debtn">
                         <div class="inside-box-circle">
                             <div class="upload-center">
@@ -68,7 +68,7 @@
             </div>
             <div class="upload-box-column">
                 <div class="upload-box">
-                    <input class="file-input" type="file" id="filesa" name="imageen">
+                    <input class="hide" type="file" id="filesa" name="imageen">
                     <label class="inside-box-button upload-button" for="filesa" id="enbtn">
                         <div class="inside-box-circle">
                             <div class="upload-center">
@@ -188,7 +188,7 @@
         var form = document.getElementById("imgForm");
         form.addEventListener("submit", ocr, true); 
         </script>
-        <input type="submit" id="senden" class="submit-input"/>
+        <input type="submit" id="senden" class="hide"/>
         <button for="senden" id="weiter_btn" class="outside-box-button submit-button">WEITER</button>
         {% csrf_token %}
     </div>

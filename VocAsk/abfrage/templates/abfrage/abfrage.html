@@ -24,22 +24,22 @@
     </div>
 
     <div class="center-div">
-        <section class="korrektur-box" id="bar">
+        <section class="standard-box" id="bar">
             <div class="center-div">
 
-                <div id='result' class='textfeld-boxen'>...</div>
+                <div id='result' class='inside-standard-box'>...</div>
         
-                <div id= 'record' class='textfeld-boxen'>
+                <div id= 'record' class='inside-standard-box'>
 
-                    <button onclick="abfrage()" class="file-input" id="re">start</button>
-                    <label class ="inside-box-button upload-button" for="re">Abfrage starten</label>
+                    <button onclick="abfrage()" class="hide" id="re"></button>
+                    <label class ="inside-box-button access-button" for="re" style="width:200px; padding-top:10px;">Abfrage starten</label>
                     
                     <form action="/abfrage/audio_data"  method="POST">
                         {% csrf_token %}
                         
                         {% for message in messages %}
                         {%if "en" in message.tags %}
-                            <section class="file-input" id="voclisten">
+                            <section class="hide" id="voclisten">
                                 <ul   class="messages" >
                                     <li  name='vocsena' id='vocsena' > {{ message }} </li>
                                 </ul> 
@@ -49,7 +49,7 @@
 
                         {% for message in messages %}
                         {%if "de" in message.tags %}
-                            <section class="file-input" id="voclistde">
+                            <section class="hide" id="voclistde">
                                 <ul   class="messages" >
                                     <li  name='vocsdea' id='vocsdea' > {{ message }} </li>
                                 </ul> 
@@ -198,25 +198,25 @@
     </div>
 
     <div class="center-div">
-        <div class="abfrage-box">
+        <div class="standard-box">
             
                 
-                <section class="statistiken-innen-box">
+                <section class="statistic-box inside-standard-box">
                     <label class="übers">Richtig</label>
                     <section class="übersone" id="pa">0%</section>
                 </section>
 
-                <section class="statistiken-innen-box">
+                <section class="statistic-box inside-standard-box">
                     <label class="übers">Verlauf</label>
                     <section id="curve_chart" class="übersoneb" style="width: 210px; height: 105px;"></section>
                 </section>
                 
-                <section class="statistiken-innen-box">
+                <section class="statistic-box inside-standard-box">
                     <label class="übers">Punkte</label>
                     <section class="übersone" id="rof">~</section>
                 </section>
 
-                <section class="statistiken-innen-box">
+                <section class="statistic-box inside-standard-box">
                     <label class="übers">letzte Vokabel</label>
                     <section class="übersonea" id="rvoc">~</section>
                 </section>
@@ -225,12 +225,12 @@
         </div>
     </div>
 
-    <section>
-        <div class="container">
-            <a href="/abfrage/fotos" class="container">
-                <button class="outside-box-button submit-button">ABBRECHEN</button> 
-            </a> 
-        </div>
-    </section>
+    
+    <div class="center-div">
+        <a href="/abfrage/fotos" class="container">
+            <button class="outside-box-button submit-button">ABBRECHEN</button> 
+        </a> 
+    </div>
+    
 
 {% endblock %}

@@ -28,8 +28,8 @@
             <div class="upload-box-column">
                 <div class="upload-box" >
                     <input class="file-input" type="file" id="files" name="imagede">
-                    <label class="upload-button" for="files" id="debtn">
-                        <div class="upload-circle">
+                    <label class="inside-box-button upload-button" for="files" id="debtn">
+                        <div class="inside-box-circle">
                             <div class="upload-center">
                                 <i class="fa fa-upload"></i>
                             </div>
@@ -69,8 +69,8 @@
             <div class="upload-box-column">
                 <div class="upload-box">
                     <input class="file-input" type="file" id="filesa" name="imageen">
-                    <label class="upload-button" for="filesa" id="enbtn">
-                        <div class="upload-circle">
+                    <label class="inside-box-button upload-button" for="filesa" id="enbtn">
+                        <div class="inside-box-circle">
                             <div class="upload-center">
                                 <i class="fa fa-upload"></i>
                             </div>
@@ -189,7 +189,7 @@
         form.addEventListener("submit", ocr, true); 
         </script>
         <input type="submit" id="senden" class="submit-input"/>
-        <button for="senden" id="weiter_btn" class="submit-button">WEITER</button>
+        <button for="senden" id="weiter_btn" class="outside-box-button submit-button">WEITER</button>
         {% csrf_token %}
     </div>
 

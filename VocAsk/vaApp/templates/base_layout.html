@@ -13,7 +13,12 @@
 
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_accounts.css' %}">
     
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/buttons.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/outside_box_buttons.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/scroll_top_button.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/switch_button.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/checkbox_button.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/inside_box_buttons.css' %}">
+    
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_basics.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_fotos.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style_korrektur.css' %}">
@@ -51,7 +56,7 @@
                 <li>
                     <form class="logout-link" action="/accounts/logout/" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="access-button">Logout</button>
+                        <button type="submit" class="outside-box-button access-button">Logout</button>
                     </form>
                 </li>
             </ul>
@@ -63,10 +68,10 @@
             <ul>
                 <li>
                     <a href="/accounts/login" style="text-decoration: none;">
-                        <button type="submit" class="access-button">Login</button>
+                        <button type="submit" class="outside-box-button access-button">Login</button>
                     </a>
                     <a href="/accounts/signup" style="text-decoration: none;">
-                        <button type="submit" class="access-button">Signup</button>
+                        <button type="submit" class="outside-box-button access-button">Signup</button>
                     </a>
                 </li>
             </ul>

@@ -32,7 +32,7 @@
                 <div id= 'record' class='textfeld-boxen'>
 
                     <button onclick="abfrage()" class="file-input" id="re">start</button>
-                    <label class ="upload-button" for="re">Abfrage starten</label>
+                    <label class ="inside-box-button upload-button" for="re">Abfrage starten</label>
                     
                     <form action="/abfrage/audio_data"  method="POST">
                         {% csrf_token %}
@@ -228,7 +228,7 @@
     <section>
         <div class="container">
             <a href="/abfrage/fotos" class="container">
-                <button class="submit-button">ABBRECHEN</button> 
+                <button class="outside-box-button submit-button">ABBRECHEN</button> 
             </a> 
         </div>
     </section>

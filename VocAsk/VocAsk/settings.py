@@ -127,9 +127,8 @@ STATIC_ROOT = 'home/hammerman31/VocAsk/VocAsk/vaApp/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'vocaskcontact@gmail.com'
-EMAIL_HOST_PASSWORD = 'hcenhhgrkzgqttlh'
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '17e5fa4201a119'
+EMAIL_HOST_PASSWORD = '4d798b42b5511e'
+EMAIL_PORT = '2525'
+

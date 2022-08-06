@@ -7,7 +7,7 @@
     <title>VocAsk</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
-    
+
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/base_layout.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/page_specific_layout.css' %}">
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/layout/boxes.css' %}">
@@ -20,6 +20,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/components/inside_box_buttons.css' %}">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <div class="topnav" id="myTopnav">
@@ -29,12 +30,12 @@
         <a class="menulinks" href="/">home</a>
         <a class="menulinks" href="/about">about</a>
         <a class="menulinks" href="/anleitung">anleitung</a>
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
+        <a href="javascript:void(0);" class="icon" onclick="menuResponsiveness()">
+                <i class="fa fa-bars"></i>
         </a>
     </div>
     <script type="text/javascript">
-        function myFunction() {
+        function menuResponsiveness() {
           var x = document.getElementById("myTopnav");
           if (x.className === "topnav") {
             x.className += " responsive";

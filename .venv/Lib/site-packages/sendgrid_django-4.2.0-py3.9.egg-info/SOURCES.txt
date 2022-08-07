@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+sendgrid_django.egg-info/PKG-INFO
+sendgrid_django.egg-info/SOURCES.txt
+sendgrid_django.egg-info/dependency_links.txt
+sendgrid_django.egg-info/requires.txt
+sendgrid_django.egg-info/top_level.txt
+sgbackend/__init__.py
+sgbackend/mail.py
+sgbackend/version.py

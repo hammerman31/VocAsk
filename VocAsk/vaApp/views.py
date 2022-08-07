@@ -7,6 +7,7 @@ from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 
 def index(request):
+    print(os.environ.get('SENDGRID_API_KEY'))
     return render(request, 'index.html')
 
 def datenschutz(request):

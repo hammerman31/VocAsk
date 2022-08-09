@@ -3,8 +3,6 @@ from django.http import HttpResponse
 import mimetypes
 import os
 from django.http.response import HttpResponse
-
-from VocAsk.VocAsk.settings import MAILGUN_API_KEY
 from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 import requests

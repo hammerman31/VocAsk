@@ -25,7 +25,6 @@ def about(request):
 			'message':form.cleaned_data['message'], 
 			}
             message = "\n".join(body.values())
-            print(settings.MAILGUN_API_KEY)
             send_simple_message(message)
             
             return redirect("about")

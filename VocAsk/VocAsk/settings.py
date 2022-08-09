@@ -128,5 +128,5 @@ STATIC_ROOT = 'home/hammerman31/VocAsk/VocAsk/vaApp/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-MAILGUN_API_KEY = os.getenv("MAILGUN_API_KEY")
+MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
 

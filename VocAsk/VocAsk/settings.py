@@ -128,10 +128,5 @@ STATIC_ROOT = 'home/hammerman31/VocAsk/VocAsk/vaApp/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+MAILGUN_API_KEY = os.getenv("SECRET_KEY")
 

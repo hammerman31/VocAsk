@@ -3,9 +3,12 @@ from django.http import HttpResponse
 import mimetypes
 import os
 from django.http.response import HttpResponse
+
+from VocAsk.VocAsk.settings import MAILGUN_API_KEY
 from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 import requests
+from django.conf import settings
 
 def index(request):
     return render(request, 'index.html')
@@ -33,7 +36,7 @@ def about(request):
 def send_simple_message(message):
 	return requests.post(
 		"https://api.mailgun.net/v3/sandbox76979eac12124c8794612a00da706320.mailgun.org/messages",
-            auth=("api", os.environ.get('MAILGUN_API_KEY')),
+            auth=("api", settings.MAILGUN_API_KEY),
             data={"from": "Excited User <mailgun@sandbox76979eac12124c8794612a00da706320.mailgun.org>",
                 "to": "vocaskcontact@gmail.com",
                 "subject": "VocAsk Nutzernachricht",

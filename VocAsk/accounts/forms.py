@@ -1,7 +1,8 @@
-from django import forms 
+from django import forms
 from .models import VocabularySets
+
 
 class SubmitVocabularySets(forms.ModelForm):
     class Meta:
         model = VocabularySets
-        fields = '__all__'
+        fields = "__all__"

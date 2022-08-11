@@ -1,62 +1,51 @@
-/**/
-/* gespeichert.html */
 .checkbox-text {
-    margin-bottom: 7px;
-    font-size: 14px;
-    font-weight: 600;
+margin-bottom:7px;
+font-size:14px;
+font-weight:600;
 }
 
-/* fotos.html */
 .hide {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+width:.1px;
+height:.1px;
+opacity:0;
+overflow:hidden;
+position:absolute;
+z-index:-1;
 }
 
-.img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.access-form {
+margin-top:20px;
+padding:20px;
 }
 
-/* login.html and signup.html*/
-.access-form{
-    margin-top: 20px;
-    padding: 20px;
-  }
-  .access-form input{
-    display: block;
-    margin: 10px;
-    padding: 10px;
-  }
-  
-  .errorlist li{
-    padding: 5px;
-    list-style-type: none;
-    border: 1px solid #cc0000;
-    border-radius: 12px;
-    color:#cc0000;
-    font-size: 13px;
-    font-weight: 600;
-    margin: 0px 0;
-    width: 200px;
-  }
-  
-  .access-h{
-    margin-bottom: 15px;
-  }
-  
-/* about.html */
-#id_first_name, #id_last_name, #id_email_address, #id_message{
-    margin-bottom: 10px;
+.access-form input {
+display:block;
+margin:10px;
+padding:10px;
 }
 
-/* index.html */
-.symbol-logo{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.errorlist li {
+list-style-type:none;
+border:1px solid #c00;
+border-radius:12px;
+color:#c00;
+font-size:13px;
+font-weight:600;
+width:200px;
+margin:0;
+padding:5px;
+}
+
+.access-h {
+margin-bottom:15px;
+}
+
+#id_first_name,#id_last_name,#id_email_address,#id_message {
+margin-bottom:10px;
+}
+
+.img,.symbol-logo {
+display:block;
+margin-left:auto;
+margin-right:auto;
 }

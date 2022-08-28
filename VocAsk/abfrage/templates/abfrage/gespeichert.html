@@ -9,7 +9,7 @@
 <div type="hidden" id="dimmer"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<form action="/abfrage/gespeichertZuAbfrage/" method="post" id="form">
+<form action="/abfrage/gespeicherte_abfrage/" method="post" id="form">
     {% for VocabularySet in savedVocabulary %}
     <div class="center-div">
         <div class="checkbox-box">
@@ -52,9 +52,6 @@
                         alert("Checkbox is unchecked.");
                         window.location = "/abfrage/gespeichert/";
                     }
-
-                    
-               
             }
             var form = document.getElementById("form");
             form.addEventListener("submit", submit, true);

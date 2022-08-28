@@ -22,6 +22,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name="index"),
     path("datenschutz/", views.datenschutz),
+    path("impressum/", views.impressum),
     path("about/", views.about, name="about"),
     path("anleitung/", views.anleitung),
     path("accounts/", include("accounts.urls")),

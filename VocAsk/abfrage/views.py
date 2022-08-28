@@ -1,96 +1,126 @@
+"""
+Django views for abfrage app.
+
+"""
 from django.shortcuts import render
 from django.contrib import messages
-from django.contrib import sessions
-from django.http import HttpResponse
-from .forms import VocabularyFormEn, VocabularyFormDe, TitleForm
-from vocTransformer import vocTransformer
-from django.http import JsonResponse
+from vocTransformer import voc_transformer
 from django.views.decorators.csrf import csrf_exempt
 from accounts.forms import SubmitVocabularySets
 from accounts.models import VocabularySets
-from django.contrib.auth.models import User
+from .forms import VocabularyFormEn, VocabularyFormDe, TitleForm
 
-# from forms import VocabularyForm
 
-# Create your views here.
 def fotos_view(request):
+    """
+    Display the image page to upload images.
+
+    **Template**
+
+    :template:`fotos.html`
+
+    """
     return render(request, "fotos.html")
 
 
 def is_ajax(request):
+    """
+    Checks if incoming request is an ajax request.
+
+    """
     return request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
 
 
 def korrektur(request):
+    """
+    Display the korrektur page for correcting previosly scanned from uploaded images.
+
+    **Context**
+
+    ``txt_voc_en``
+        String scanned from image of english vocabulary from previons foto page.
+
+    ``txt_voc_de``
+        String scanned from image of german vocabulary from previons foto page.
+
+    ``vocsde``
+        German vocabulary in array.
+
+    ``vocsen``
+        English vocabulary in array.
+
+    ``formDe``
+        An instance of: `VocabularyFormDe`.
+
+    ``formEn``
+        An instance of: `VocabularyFormEn`.
+
+    ``formTitle``
+        An instance of: `TitleForm`.
+
+    **Template**
+
+    :template:`korrektur.html`
+
+    """
     if is_ajax(request=request):
         txt_voc_en = request.POST.get("txt_voc_en")
         txt_voc_de = request.POST.get("txt_voc_de")
-        print(txt_voc_de)
-        print(txt_voc_en)
 
-        vocsde = vocTransformer(txt_voc_de)
-        vocsen = vocTransformer(txt_voc_en)
+        vocsde = voc_transformer(txt_voc_de)
+        vocsen = voc_transformer(txt_voc_en)
 
-        # DE_VOC = vocsde
         request.session["vocsen"] = vocsen
         request.session["vocsde"] = vocsde
-        print(vocsde)
-        print(vocsen)
 
-        formEn = VocabularyFormEn(vocsen)
-        # formEn.createFields()
-        formDe = VocabularyFormDe(vocsde)
-        formTitle = TitleForm()
-        # formDe.createFields()
-        vocslen = len(vocsde)
-        # messages.success(request, vocsde, extra_tags="de")
-        # messages.success(request, vocsen, extra_tags="en")
-        context = {"vocsen": vocsen, "vocsde": vocsde}
-        # return render(request, 'success.html', context)
-        message = "yes"
-        # return HttpResponse(message)
-        # return render(request, 'korrektur.html', {'form': formEn})
-        print("waht?")
-    else:
-        message = "No"
+    if request.method == "GET":
         formEn = VocabularyFormEn(request.session["vocsen"])
         formDe = VocabularyFormDe(request.session["vocsde"])
         formTitle = TitleForm()
-        vocslen = len(request.session["vocsde"])
-        # formEn.createFields()
-        print("Fuck")
-    # Hier muss die Korrektur Seite zurück gegeben werden
-    return render(
-        request,
-        "korrektur.html",
-        {"formEn": formEn, "formDe": formDe, "titleField": formTitle},
-    )
+
+        return render(
+            request,
+            "korrektur.html",
+            {"formEn": formEn, "formDe": formDe, "titleField": formTitle},
+        )
+    return render(request, "korrektur.html")
 
 
 def abfrage(request):
-    if request.method == "POST":
-        # bis else ist das eigentlich irrelevant, weil es hier eine GET request geben wird
-        formEn = VocabularyFormEn(request.POST)
-        formDe = VocabularyFormDe(request.POST)
-        if formEn.is_valid() and formDe.is_valid():
-            vocsen = []
-            vocsde = []
-            for x in range(len(formEn.cleaned_data)):
-                vocsen.append(formDe.cleaned_data[str(x) + "_de"])
-                vocsde.append(formEn.cleaned_data[str(x) + "_en"])
-        print("Yaaaaay")
+    """
+    Display the abfrage page for the interrogation.
+    Furthermore the vocabulary set is saved if user requested it.
 
-    else:
-        vocsLen = len(request.GET) / 2
-        if vocsLen != 0.0:
+    **Context**
+
+    ``len_voc_pairs``
+        The amount of german and english vocabulary pairs as a float.
+
+    ``vocsde``
+        German vocabulary in array.
+
+    ``vocsen``
+        English vocabulary in array.
+
+    ``form``
+        An instance of: `SubmitVocabularySets`.
+
+    **Template**
+
+    :template:`abfrage.html`
+    :template:`fotos.html`
+
+    """
+    if request.method == "GET":
+        len_voc_pairs = len(request.GET) / 2
+        if len_voc_pairs != 0.0:
             vocsen = []
             vocsde = []
-            for x in range(1, int(vocsLen + 1)):
-                vocsde.append(request.GET.get(str(x) + "_de", ""))
-                vocsen.append(request.GET.get(str(x) + "_en", ""))
+            for index in range(1, int(len_voc_pairs + 1)):
+                vocsde.append(request.GET.get(str(index) + "_de", ""))
+                vocsen.append(request.GET.get(str(index) + "_en", ""))
             if request.GET.get("title") != "":
-                form1 = SubmitVocabularySets()
-                form = form1.save(commit=False)
+                form = SubmitVocabularySets().save(commit=False)
                 form.title = request.GET.get("title")
                 form.vocEn = str(vocsen)
                 form.vocDe = str(vocsde)
@@ -102,56 +132,58 @@ def abfrage(request):
 
             return render(request, "abfrage.html")
         else:
-            return render(request, "fehler.html")
+            return render(request, "fotos.html")
 
 
 def gespeichert(request):
-    savedVocabularyData = VocabularySets.objects.filter(user=request.user)
-    savedVocabulary = {"savedVocabulary": savedVocabularyData}
-    return render(request, "gespeichert.html", savedVocabulary)
+    """
+    Display the saved vocabulary sets.
+
+    **Context**
+
+    ``saved_voc_data``
+        Filtered vaocabulary sets from VocabularySets Model from specific user.
+
+    ``saved_voc``
+        Vocabulary saved from user in dictionary.
+
+    **Template**
+
+    :template:`gespeichert.html`
+
+    """
+    saved_voc_data = VocabularySets.objects.filter(user=request.user)
+    saved_voc = {"savedVocabulary": saved_voc_data}
+    return render(request, "gespeichert.html", saved_voc)
 
 
 @csrf_exempt
-def gespeichertZuAbfrage(request):
+def gespeicherte_abfrage(request):
+    """
+    Display the abfrage page for the interrogation after user
+    chose a previously saved vocabulary sets.
+
+    **Context**
+
+    ``chosen_voc_set``
+        The chosen vocabulary set.
+
+    ``vocsde``
+        German vocabulary in array.
+
+    ``vocsen``
+        English vocabulary in array.
+
+    **Template**
+
+    :template:`abfrage.html`
+
+    """
     if request.method == "POST":
-        chosenVocs = request.POST.getlist("group[]")
-        vocs = chosenVocs[0].splitlines()
+        chosen_voc_set = request.POST.getlist("group[]")
+        vocs = chosen_voc_set[0].splitlines()
         vocsde = vocs[1]
         vocsen = vocs[0]
         messages.success(request, vocsde, extra_tags="de")
         messages.success(request, vocsen, extra_tags="en")
         return render(request, "abfrage.html")
-
-
-@csrf_exempt
-def audio_data(request):
-
-    data = request.GET
-    # translator= Translator(to_lang="de", from_lang = "en")
-    # text = data.get('text', False)
-    # translation = translator.translate(text)
-
-    if data.get("save", False):  # Change No.5
-        ans = True
-        # translator= Translator(to_lang="de", from_lang = "en")
-
-        text = data.get("text", False)  # Change No.6
-        # vocsen = data.get('textone', False)
-        # translation = translator.translate(text)
-        vocsde = data.get("texttwo", False)
-        if vocsde and text:
-            print("Text = ", text)  # vocsen
-            print(vocsde)
-            # translator= Translator(to_lang="de", from_lang = "en")
-            # translation = translator.translate(text)
-        else:
-            ans = False
-
-        return JsonResponse({"ans": ans})  # Change No.7
-
-    elif data.get("success", False):  # Change No.8
-
-        return render(request, "abfrage.html")
-
-    # translation = translator.translate(text)xws
-    return render(request, "abfrage.html")  # Change No.9n

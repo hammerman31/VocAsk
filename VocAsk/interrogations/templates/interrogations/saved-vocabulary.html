@@ -1,0 +1,61 @@
+{% extends 'base-layout.html' %}
+
+{% block content %}
+<div class="center-div">
+    <h1>Gespeicherte Vokabeln</h1>
+</div>
+
+<div type="hidden" id="loader"></div>
+<div type="hidden" id="dimmer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<form action="/abfrage/gespeicherte_abfrage/" method="post" id="form">
+    {% for VocabularySet in savedVocabulary %}
+    <div class="center-div">
+        <div class="checkbox-box">
+            <div class="vertical-center-div">
+                <input class="inside-checkbox-box" type="checkbox" id="checkbox" value="{{ VocabularySet.vocEn }}
+                {{  VocabularySet.vocDe }}" name="group[]">
+
+                <label class="inside-checkbox-box" for="checkbox" >
+                    <label class="checkbox-text">{{ VocabularySet.title}}</label>
+                    <label class="checkbox-text" id="devoc">
+                        deutsche Vokabeln: {{ VocabularySet.vocEn }}
+                    </label>
+                    <label class="checkbox-text" id="envoc">
+                        englische Vokabeln: {{  VocabularySet.vocDe }}
+                    </label>
+                </label>
+
+                
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <script>
+        $('input[type="checkbox"]').on('change', function() {
+            $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+        });
+    </script>
+
+    <div class="center-div">
+        <button type="submit" class="outside-box-button submit-button" id="submit-button">WEITER</button>
+        <script>
+
+            var submit = function(event) {
+                event.preventDefault();
+                document.getElementById('loader').innerHTML = ['<div class="loader" id="loader"></div>']
+               
+                if( $(".inside-checkbox-box").is(":checked")){
+                    document.getElementById('submit-button').form.submit();
+                    } else {
+                        alert("Checkbox is unchecked.");
+                        window.location = "/abfrage/gespeichert/";
+                    }
+            }
+            var form = document.getElementById("form");
+            form.addEventListener("submit", submit, true);
+        </script>
+    </div>
+</form>
+{% endblock %}

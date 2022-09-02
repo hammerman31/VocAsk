@@ -41,18 +41,6 @@
     <div class="center-div">
         <button type="submit" class="outside-box-button submit-button" id="submit-button">WEITER</button>
         <script>
-
-            var submit = function(event) {
-                event.preventDefault();
-                document.getElementById('loader').innerHTML = ['<div class="loader" id="loader"></div>']
-               
-                if( $(".inside-checkbox-box").is(":checked")){
-                    document.getElementById('submit-button').form.submit();
-                    } else {
-                        alert("Checkbox is unchecked.");
-                        window.location = "/abfrage/gespeichert/";
-                    }
-            }
             var form = document.getElementById("form");
             form.addEventListener("submit", submit, true);
         </script>

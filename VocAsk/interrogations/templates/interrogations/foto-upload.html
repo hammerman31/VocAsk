@@ -37,31 +37,14 @@
                         deutsche Vokabeln
                     </label>
                     <p></p>
-                    <output class="image" id="list" style="border-radius:30px"></output>
+                    <output class="image" id="output_de" style="border-radius:30px"></output>
                     <input type="hidden" name="txt_voc_de" id="txt_voc_de" value=""></input>
                     <script>
-                    
-                        if (window.FileReader) {
-                        function handleFileSelect(evt) {
-                        var files = evt.target.files;
-                        var f = files[0];
-                        var reader = new FileReader();
                         
-                            reader.onload = (function(theFile) {
-                            return function(e) {
-                                document.getElementById('list').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" class="img" width="200", height=280 style="border-radius:12px;" id="imgde"/>'].join('');
-                            };
-                            })(f);
-                    
-                            reader.readAsDataURL(f);
-                        }
-                        
-                        } else {
-                        alert('This browser does not support FileReader');
-                    }
-                    
-                        document.getElementById('files').addEventListener('change', handleFileSelect, false);
-                        
+                        document.getElementById('files').addEventListener('change', (event) => ((arg) => {
+                            handleFileSelect(event, arg);
+                        })('de'),
+                        false);
                         
                     </script>
                 </div>
@@ -78,32 +61,15 @@
                         englische Vokabeln
                     </label>
                     <p></p>
-                    <output class="image" id="lista"></output>
+                    <output class="image" id="output_en"></output>
                     <input type="hidden" name="txt_voc_en" id="txt_voc_en" value=""></input>
                     <script>
                     
-                        if (window.FileReader) {
-                        function handleFileSelect(evt) {
-                        var filesa = evt.target.files;
-                        var f = filesa[0];
-                        var reader = new FileReader();
-                        
-                            reader.onload = (function(theFile) {
-                            return function(e) {
-                                document.getElementById('lista').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" class="img" width="200", height=280, style="border-radius:12px" id="imgen"/>'].join('');
-                            };
-                            })(f);
-                    
-                            reader.readAsDataURL(f);
-                            
-                        }
-                        } else {
-                        alert('This browser does not support FileReader');
-                    }
-                    
-                        document.getElementById('filesa').addEventListener('change', handleFileSelect, false);
+                        document.getElementById('filesa').addEventListener('change', (event) => ((arg) => {
+                            handleFileSelect(event, arg);
+                        })('en'),
+                        false);
                 
-                        
                     </script>
                 </div>
             </div>
@@ -111,82 +77,10 @@
     </div>
 
     <div class="center-div">
-        <script>
         
-            var ocr = function(event) {
-                event.preventDefault();
-                //document.getElementById('dimmer').innerHTML = ['<div class="dimmer" id="dimmer"></div>']
-                document.getElementById('loader').innerHTML = ['<div class="loader" id="loader"></div>']
-                if(!document.getElementById('imgde') || !document.getElementById('imgen')) {
-                    if(!document.getElementById('imgde')) {
-                        var alerttxt = "Es wurde kein Foto der deutschen Vokabeln hochgeladen."
-                    }
-                    if(!document.getElementById('imgen')) {
-                        var alerttxt = "Es wurde kein Foto der englischen Vokabeln hochgeladen."
-                    }
-                    if(!document.getElementById('imgde') & !document.getElementById('imgen')) {
-                        var alerttxt = "Es wurden keine Fotos hochgeladen."
-                    }
-                    alert(alerttxt)
-                    window.location = "/abfrage/fotos"
-                }
-                else {
-                
-                Tesseract.recognize(
-                    document.getElementById('imgde').src,
-                    'deu', {
-                        logger: m => console.log(m)
-                    }
-                ).then(({
-                    data: {
-                        text
-                    }
-                }) => {
-                    console.log(text);
-                    Tesseract2(text);
-                })
-                }
-            };
-
-        function Tesseract2(text_de) {
-            Tesseract.recognize(
-                document.getElementById('imgen').src,
-                'eng', {
-                    logger: m => console.log(m)
-                }
-            ).then(({
-                data: {
-                    text
-                }
-            }) => {
-                console.log(text);
-                AjaxCall(text_de, text);
-            })
-
-        }
-
-        function AjaxCall(text_de, text_en) {
-            $.ajax({
-                type: 'POST',
-                url: "/abfrage/korrektur/",
-                data: {
-                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(), // to avois csrf error
-                    txt_voc_en: text_en,
-                    txt_voc_de: text_de
-                },
-                success: function(json) {
-                    console.log("success");
-                    window.location = "/abfrage/korrektur/"
-                },
-                error: function(xhr, errmsg, err) {
-                    console.log(xhr.status + ": " + xhr.responseText);
-                }
-            });
-        }
-
-
-        var form = document.getElementById("imgForm");
-        form.addEventListener("submit", ocr, true); 
+        <script>
+            var form = document.getElementById("imgForm");
+            form.addEventListener("submit", ocr, true); 
         </script>
         <input type="submit" id="senden" class="hide"/>
         <button for="senden" id="weiter_btn" class="outside-box-button submit-button">WEITER</button>

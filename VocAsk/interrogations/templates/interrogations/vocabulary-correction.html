@@ -61,22 +61,6 @@
     </div>
   </div>
 
-  <script>
-    function displayTitleField() {
-      // Get the checkbox
-      var checkBox = document.getElementById("switch");
-      // Get the output text
-      var titleBox = document.getElementById("title-box");
-
-      // If the checkbox is checked, display the output text
-      if (checkBox.checked == true){
-        titleBox.style.display = "block";
-      } else {
-        titleBox.style.display = "none";
-      }
-    }
-  </script>
-
   {%endif%}
 
   <div class="center-div">
@@ -84,16 +68,7 @@
     <button for="senden" id="weiter_btn" class="outside-box-button submit-button" onclick="submit()">WEITER</button>
   </div>
 
-  <script>
-    function submit() {
-      var checkBox = document.getElementById("switch");
-      if (checkBox.checked == false){
-        document.getElementById("titleField").value = "!h4fd46rZMJ4zf&2hm3"
-      }
-      var button = document.getElementById('weiter_btn');
-      button.form.submit();
-    }
-  </script>
+  
 
 </form>
 

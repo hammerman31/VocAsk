@@ -232,6 +232,19 @@ var submit = function(event) {
             window.location = "/abfrage/gespeichert/";
         }
 }
+function hideVocSets(id) {
+    console.log(id)
+    var vocSet = document.getElementById("voc-set-"+id);
+    var arrowIcon = document.getElementById("arrow-icon"+id);
+    // If the checkbox is checked, display the output text
+    if (vocSet.style.display == "none"){
+        vocSet.style.display = "block";
+        arrowIcon.className = "fa fa-chevron-up";
+    } else {
+        vocSet.style.display = "none";
+        arrowIcon.className = "fa fa-chevron-down";
+    }
+  }
 
 //vocabulary-correction.html
 function submit() {

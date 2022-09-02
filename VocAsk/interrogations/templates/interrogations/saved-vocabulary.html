@@ -17,14 +17,19 @@
                 <input class="inside-checkbox-box" type="checkbox" id="checkbox" value="{{ VocabularySet.vocEn }}
                 {{  VocabularySet.vocDe }}" name="group[]">
 
-                <label class="inside-checkbox-box" for="checkbox" >
+                <label class="inside-checkbox-box dynamic-id" for="checkbox" >
                     <label class="checkbox-text">{{ VocabularySet.title}}</label>
-                    <label class="checkbox-text" id="devoc">
-                        deutsche Vokabeln: {{ VocabularySet.vocEn }}
-                    </label>
-                    <label class="checkbox-text" id="envoc">
-                        englische Vokabeln: {{  VocabularySet.vocDe }}
-                    </label>
+                    <button type="button" onclick="hideVocSets(this.id)" style="all:unset;">
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <div style="display:none;">
+                        <label class="checkbox-text de" >
+                            deutsche Vokabeln: {{ VocabularySet.vocEn }}
+                        </label>
+                        <label class="checkbox-text en" >
+                            englische Vokabeln: {{  VocabularySet.vocDe }}
+                        </label>
+                    </div>
                 </label>
 
                 
@@ -37,7 +42,15 @@
             $('input[name="' + this.name + '"]').not(this).prop('checked', false);
         });
     </script>
-
+    <script>
+        $(document).ready(function() {
+            $(".dynamic-id").each(function(index){
+                $(this).find("div").prop("id", "voc-set-"+index);
+                $(this).find("button").prop("id", index);
+                $(this).find("i").prop("id", "arrow-icon"+index);
+            });
+        });
+    </script>
     <div class="center-div">
         <button type="submit" class="outside-box-button submit-button" id="submit-button">WEITER</button>
         <script>

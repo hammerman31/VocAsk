@@ -25,7 +25,7 @@ function topFunction() {
 }
   
 //foto-upload.html
-  var ocr = function(event) {
+async function submitFotos(event) {
     event.preventDefault();
     document.getElementById('loader').innerHTML = ['<div class="loader" id="loader"></div>']
     if(!document.getElementById('imgde') || !document.getElementById('imgen')) {
@@ -42,38 +42,20 @@ function topFunction() {
         window.location = "/abfrage/fotos"
     }
     else {
-    
-    Tesseract.recognize(
-        document.getElementById('imgde').src,
-        'deu', {
-            logger: m => console.log(m)
-        }
-    ).then(({
-        data: {
-            text
-        }
-    }) => {
-        console.log(text);
-        Tesseract2(text);
-    })
+        let de_text = await ocrTransformer('deu', 'imgde')
+        console.log(de_text)
+        let en_text = await ocrTransformer('eng', 'imgen')
+        AjaxCall(de_text, en_text);
     }
 };
-
-function Tesseract2(text_de) {
-Tesseract.recognize(
-    document.getElementById('imgen').src,
-    'eng', {
-        logger: m => console.log(m)
-    }
-).then(({
-    data: {
-        text
-    }
-}) => {
-    console.log(text);
-    AjaxCall(text_de, text);
-})
-
+async function ocrTransformer(language, img_id) {
+    const { data: { text } } = await Tesseract.recognize(
+        document.getElementById(img_id).src,
+        language, {
+            logger: m => console.log(m)
+        }
+    )
+    return text
 }
 
 function AjaxCall(text_de, text_en) {

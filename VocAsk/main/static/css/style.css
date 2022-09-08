@@ -1,6 +1,4 @@
-/* Style sheet for VocAsk */
 
-/* Provisions of basic html tags */
 
 * {
 color:#1a1f36;
@@ -10,6 +8,9 @@ font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubu
 margin:0;
 padding:0;
 }
+/* Style sheet for VocAsk */
+
+/* Provisions of basic html tags */
 
 input[type=text],input[type=password],input[type=email],textarea {
 border:0;

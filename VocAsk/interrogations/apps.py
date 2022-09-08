@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AbfrageConfig(AppConfig):
+class InterrogationsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "abfrage"
+    name = "interrogations"

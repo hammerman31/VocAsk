@@ -59,22 +59,22 @@ async function ocrTransformer(language, img_id) {
 }
 
 function AjaxCall(text_de, text_en) {
-$.ajax({
-    type: 'POST',
-    url: "/abfrage/korrektur/",
-    data: {
-        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(), // to avois csrf error
-        txt_voc_en: text_en,
-        txt_voc_de: text_de
-    },
-    success: function(json) {
-        console.log("success");
-        window.location = "/abfrage/korrektur/"
-    },
-    error: function(xhr, errmsg, err) {
-        console.log(xhr.status + ": " + xhr.responseText);
-    }
-});
+    $.ajax({
+        type: 'POST',
+        url: "/abfrage/korrektur/",
+        data: {
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(), // to avois csrf error
+            txt_voc_en: text_en,
+            txt_voc_de: text_de
+        },
+        success: function(json) {
+            console.log("success");
+            window.location = "/abfrage/korrektur/"
+        },
+        error: function(xhr, errmsg, err) {
+            console.log(xhr.status + ": " + xhr.responseText);
+        }
+    });
 }
 
 function handleFileSelect(evt, id) {
@@ -97,7 +97,7 @@ function handleFileSelect(evt, id) {
 
 //interrogation.html
 
-function speak() {
+function onloadIntroduction() {
     const utterance = new SpeechSynthesisUtterance("hallo ich bin de de sina, heute werde ich Sie abfragen, sprechen Sie bitte deutlich ins mikrofon, damit ich Sie verstehen kann")
     window.speechSynthesis.speak(utterance)
     alert("Erlaube uns bitte Zugriff auf dein Mikrofon, um dich abfragen zu lassen.")
@@ -132,7 +132,7 @@ function drawChart(datalist) {
     chart.draw(data, options);
     }
 
-function speakown(sentence) {
+function speak(sentence) {
     const utterance = new SpeechSynthesisUtterance(sentence)
     window.speechSynthesis.speak(utterance)
 }
@@ -147,22 +147,22 @@ function startConverting() {
             spr.lang='en-IN'; // Set Input language
             spr.start(); //Start Recording the voice
         var ftr='';
-    spr.onresult = function (event) {            
-        var interimTranscripts='';
-        for(var i=event.resultIndex;i<event.results.length;i++)
-        {
-            var transcript=event.results[i][0].transcript;
-            transcript.replace("\n","<br>")
-            if(event.results[i].isFinal){
-                ftr+=transcript;
-            }
-            else
-            interimTranscripts+=transcript;
-        };
-        r.innerHTML=ftr +interimTranscripts ;
-        resolve(ftr +interimTranscripts); // Resolve with the text value you need
-        };
-        spr.onerror = reject;
+        spr.onresult = function (event) {            
+            var interimTranscripts='';
+            for(var i=event.resultIndex;i<event.results.length;i++)
+            {
+                var transcript=event.results[i][0].transcript;
+                transcript.replace("\n","<br>")
+                if(event.results[i].isFinal){
+                    ftr+=transcript;
+                }
+                else
+                interimTranscripts+=transcript;
+            };
+            r.innerHTML=ftr +interimTranscripts ;
+            resolve(ftr +interimTranscripts); // Resolve with the text value you need
+            };
+            spr.onerror = reject;
     });  
     }
 
@@ -188,7 +188,7 @@ async function abfrage() {
         drawChart(datalist);
         for (var i = 0; i < voclistde.length; i++) {
             var voc_asked = voc_asked+1;
-            speakown("was heißt"+ voclistde[i]);
+            speak("was heißt"+ voclistde[i]);
             const user_response = await startConverting();
             var user_response_low = user_response.toLowerCase();
             var correct_pct_elem = document.getElementById("correct_pct_elem");
@@ -198,12 +198,12 @@ async function abfrage() {
                 var points = points+1;
                 var correct_pct = Math.round(points/voc_asked*100);
                 datalist.push([i, points]);
-                speakown("Sehr gut, das war richtig")
+                speak("Sehr gut, das war richtig")
             }
             else {
                 var correct_pct = Math.round(points/voc_asked*100);
                 datalist.push([i, points]);
-                speakown(user_response+" ist leider falsch") 
+                speak(user_response+" ist leider falsch") 
             }
             var last_voc = voclisten[i];
             last_voc_elem.innerHTML = last_voc_elem.innerHTML.replace(last_voc_elem.textContent, last_voc);
@@ -211,7 +211,7 @@ async function abfrage() {
             points_elem.innerHTML = points_elem.innerHTML.replace(points_elem.textContent, points);
             drawChart(datalist);
         }
-        speakown("Die Abfrage ist beendet. Sie hatten"+correct_pct.toString()+" Prozent richtig.")
+        speak("Die Abfrage ist beendet. Sie hatten"+correct_pct.toString()+" Prozent richtig.")
     }
     else {
         document.location.href = "fotos"
@@ -233,7 +233,6 @@ var submit = function(event) {
         }
 }
 function hideVocSets(id) {
-    console.log(id)
     var vocSet = document.getElementById("voc-set-"+id);
     var arrowIcon = document.getElementById("arrow-icon"+id);
     // If the checkbox is checked, display the output text
@@ -256,7 +255,7 @@ function submit() {
     button.form.submit();
   }
 
-  function displayTitleField() {
+function displayTitleField() {
     // Get the checkbox
     var checkBox = document.getElementById("switch");
     // Get the output text
@@ -264,9 +263,9 @@ function submit() {
 
     // If the checkbox is checked, display the output text
     if (checkBox.checked == true){
-      titleBox.style.display = "block";
+        titleBox.style.display = "block";
     } else {
-      titleBox.style.display = "none";
+        titleBox.style.display = "none";
     }
-  }
+}
 

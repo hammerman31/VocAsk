@@ -1,56 +1,82 @@
 
 //base-layout.html
 
+/**
+ * If hamburgermenu is active this method makes sure the dropdownmenu is shown when the hamburger icon is clicked.
+ * @param  {html-Element} topNav Top navigation menu
+*/
 function menuResponsiveness() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-      x.className += " responsive";
+    var topNav = document.getElementById("myTopnav");
+    if (topNav.className === "topnav") {
+        topNav.className += " responsive";
     } else {
-      x.className = "topnav";
+        topNav.className = "topnav";
     }
   }
 
+/**
+ * When the user scrolls down 20px from the top of the document, show the scroll to the top button.
+ * @param  {html-Element} scrollButton The button to scroll to the top of the page
+*/
 function scrollFunction() {
+    var scrollButton = document.getElementById("scroll-top-button");
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
+        scrollButton.style.display = "block";
     } else {
-        mybutton.style.display = "none";
+        scrollButton.style.display = "none";
     }
 }
 
-// When the user clicks on the button, scroll to the top of the document
+/**
+ *  When the user clicks the scroll to the button, the scroll height is set to zero.
+*/
 function topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
   
 //foto-upload.html
+
+/**
+ * This method is executed when the submit button on fot.html page is clicked. It checks if all the 
+ * fotos were uploaded and makes sure the fotos go through the ocr process and are sent to the backend via AjaxCall.   
+ * @param  {text} alertTxt That is the alert text displayed in case of a wrong submission.
+ * @param  {text} deVocTxt The german vocabulary scanned from the uploaded image as text. 
+ * @param  {text} enVocTxt The english vocabulary scanned from the uploaded image as text. 
+*/
 async function submitFotos(event) {
     event.preventDefault();
     document.getElementById('loader').innerHTML = ['<div class="loader" id="loader"></div>']
     if(!document.getElementById('imgde') || !document.getElementById('imgen')) {
         if(!document.getElementById('imgde')) {
-            var alerttxt = "Es wurde kein Foto der deutschen Vokabeln hochgeladen."
+            var alertTxt = "Es wurde kein Foto der deutschen Vokabeln hochgeladen."
         }
         if(!document.getElementById('imgen')) {
-            var alerttxt = "Es wurde kein Foto der englischen Vokabeln hochgeladen."
+            var alertTxt = "Es wurde kein Foto der englischen Vokabeln hochgeladen."
         }
         if(!document.getElementById('imgde') & !document.getElementById('imgen')) {
-            var alerttxt = "Es wurden keine Fotos hochgeladen."
+            var alertTxt = "Es wurden keine Fotos hochgeladen."
         }
-        alert(alerttxt)
+        alert(alertTxt)
         window.location = "/abfrage/fotos"
     }
     else {
-        let de_text = await ocrTransformer('deu', 'imgde')
-        console.log(de_text)
-        let en_text = await ocrTransformer('eng', 'imgen')
-        AjaxCall(de_text, en_text);
+        let deVocTxt = await ocrTransformer('deu', 'imgde')
+        console.log(deVocTxt)
+        let enVocTxt = await ocrTransformer('eng', 'imgen')
+        AjaxCall(deVocTxt, enVocTxt);
     }
 };
-async function ocrTransformer(language, img_id) {
+
+/**
+ * This method passes the image to the Tesseract library and returns the recognized text.
+ * @param  {text} language The language in which the text on the image is written in.
+ * @param  {text} imgId The id of the html-Element of the image. 
+ * @return {text} All the text found on the image is returned. 
+*/
+async function ocrTransformer(language, imgId) {
     const { data: { text } } = await Tesseract.recognize(
-        document.getElementById(img_id).src,
+        document.getElementById(imgId).src,
         language, {
             logger: m => console.log(m)
         }
@@ -58,14 +84,19 @@ async function ocrTransformer(language, img_id) {
     return text
 }
 
-function AjaxCall(text_de, text_en) {
+/**
+ * This method passes the inputted text from the Frontend to the Backend.
+ * @param  {text} textDe German vocabulary as text.
+ * @param  {text} textEn English vocabulary as text.
+*/
+function AjaxCall(textDe, textEn) {
     $.ajax({
         type: 'POST',
         url: "/abfrage/korrektur/",
         data: {
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(), // to avois csrf error
-            txt_voc_en: text_en,
-            txt_voc_de: text_de
+            txt_voc_en: textEn,
+            txt_voc_de: textDe
         },
         success: function(json) {
             console.log("success");
@@ -77,10 +108,16 @@ function AjaxCall(text_de, text_en) {
     });
 }
 
+/**
+ * This method takes care of the file selection process on the foto.html page and displays the uploaded image in the upload field.
+ * @param  {event} evt Brings infromation that describe the event and its current status.
+ * @param  {text} id Id of the output html-element.
+ * @param  {file} file The uploaded file accessed via the target of the event.
+ * @param  {object} reader Object of the FileReader API.
+*/
 function handleFileSelect(evt, id) {
     if (window.FileReader) {
-    var file_list = evt.target.files;
-    var file = file_list[0];
+    var file = evt.target.files[0];
     var reader = new FileReader();
     
         reader.onload = (function(theFile) {
@@ -97,6 +134,10 @@ function handleFileSelect(evt, id) {
 
 //interrogation.html
 
+/**
+ * This method is executed right after the interrogations.html is loaded and introduces the user to the websites voice.
+ * @param  {object} utterance Object of the SpeechSynthesisUtterance API.
+*/
 function onloadIntroduction() {
     const utterance = new SpeechSynthesisUtterance("hallo ich bin de de sina, heute werde ich Sie abfragen, sprechen Sie bitte deutlich ins mikrofon, damit ich Sie verstehen kann")
     window.speechSynthesis.speak(utterance)
@@ -110,6 +151,12 @@ function onloadIntroduction() {
     });
 }
 
+/**
+ * This method draws an area Chart with the inputted data.
+ * @param  {array} datalist Two-dimensional array with number of vocabulary asked and points reached.
+ * @param  {data table} data Two-dimensional array as data table.
+ * @param  {chart} chart Object of google's AreaChart.
+*/
 function drawChart(datalist) {
                             
     var data = google.visualization.arrayToDataTable(datalist);
@@ -132,11 +179,22 @@ function drawChart(datalist) {
     chart.draw(data, options);
     }
 
+/**
+ * This method outputs the inputted sentence as browser voice.
+ * @param  {text} sentence Text that should be outputtet.
+ * @param  {object} utterance Object of the SpeechSynthesisUtterance API.
+*/
 function speak(sentence) {
     const utterance = new SpeechSynthesisUtterance(sentence)
     window.speechSynthesis.speak(utterance)
 }
 
+/**
+ * This method converts the users voice into text and displays it on the screen.
+ * @param  {html-element} r Html-Element that displays the words said by the user.
+ * @param  {object} spr Object of the webkitSpeechRecognition.
+ * @param  {object} ftr Empty string that.
+*/
 function startConverting() {   
         
     return new Promise((resolve, reject) => {
@@ -166,8 +224,14 @@ function startConverting() {
     });  
     }
 
-function voc_transformer(voc_id) {
-    var voclist = document.getElementById(voc_id).textContent;
+/**
+ * This method transforms the vocabulary as an arry inside a string to a normal array.
+ * @param  {text} vocId id of html-element with vocabulary string.
+ * @param  {text} voclist String of vocabulary that is converted to an array.
+ * @return  {array} vocabulary in array.
+*/
+function vocTransformer(vocId) {
+    var voclist = document.getElementById(vocId).textContent;
     voclist = voclist.split(","); // Split the String into an array
     voclist.forEach((x, i) => {
         voclist[i] = voclist[i].includes('"') ? voclist[i].replaceAll('"', "").trim()
@@ -178,40 +242,55 @@ function voc_transformer(voc_id) {
     return voclist;
 }
 
-async function abfrage() {
-    voclisten = voc_transformer("voclisten"); // Transform String with Vocabulary into array with Vocabulary
-    voclistde = voc_transformer("voclistde");
+/**
+ * This method handels the interrogation. It asks the qustions and responds to the user and it updates tthe statistics.
+ * @param {array} voclisten Englisch vocabulary list.
+ * @param {array} voclistde German vocabulary list.
+ * @param {number} points Amount of points the user got by answering correct. One right answer gives one point.
+ * @param {number} vocAsked Amount of vocabulary asked.
+ * @param {array} datalist Two-dimensional array with number of vocabulary asked and points reached.
+ * @param {text} userResponse Response of the user to the vocabulary question.
+ * @param {text} userResponseLow Response of the user to the vocabulary question in lowercase.
+ * @param {html-Element} correctPctElem Html-Element that displays the percentage the user answered right.
+ * @param {html-Element} pointsElem Html-Element that displays the amount of points.
+ * @param {html-Element} lastVocElem Html-Element that displays the solution to the asked vocabulaary question.
+ * @param {number} correctPct Percentage of questions the user answered right.
+ * @param {text} lastVoc The last vocabulary asked in englsh. Therfore the solution to the last question.
+*/
+async function interrogation() {
+    voclisten = vocTransformer("voclisten"); // Transform String with Vocabulary into array with Vocabulary
+    voclistde = vocTransformer("voclistde");
     if (voclistde.length == voclisten.length) { 
         var points = 0;
-        var voc_asked = 0;
+        var vocAsked = 0;
         var datalist = [["Runden", "Richtige Vokabeln"],[0, 0]];
         drawChart(datalist);
         for (var i = 0; i < voclistde.length; i++) {
-            var voc_asked = voc_asked+1;
+            var vocAsked = vocAsked+1;
             speak("was heißt"+ voclistde[i]);
-            const user_response = await startConverting();
-            var user_response_low = user_response.toLowerCase();
-            var correct_pct_elem = document.getElementById("correct_pct_elem");
-            var points_elem = document.getElementById("points_elem");
-            var last_voc_elem = document.getElementById("last_voc_elem");
-            if(voclisten[i].toLowerCase().includes(user_response_low) || voclisten[i].toLowerCase()==user_response_low || user_response_low.toLowerCase().includes(voclisten[i])) {
+            const userResponse = await startConverting();
+            var userResponseLow = userResponse.toLowerCase();
+            var correctPctElem = document.getElementById("correct_pct_elem");
+            var pointsElem = document.getElementById("points_elem");
+            var lastVocElem = document.getElementById("last_voc_elem");
+            if(voclisten[i].toLowerCase().includes(userResponseLow) || voclisten[i].toLowerCase()==userResponseLow || userResponseLow.toLowerCase().includes(voclisten[i])) {
                 var points = points+1;
-                var correct_pct = Math.round(points/voc_asked*100);
+                var correctPct = Math.round(points/vocAsked*100);
                 datalist.push([i, points]);
                 speak("Sehr gut, das war richtig")
             }
             else {
-                var correct_pct = Math.round(points/voc_asked*100);
+                var correctPct = Math.round(points/vocAsked*100);
                 datalist.push([i, points]);
-                speak(user_response+" ist leider falsch") 
+                speak(userResponse+" ist leider falsch") 
             }
-            var last_voc = voclisten[i];
-            last_voc_elem.innerHTML = last_voc_elem.innerHTML.replace(last_voc_elem.textContent, last_voc);
-            correct_pct_elem.innerHTML = correct_pct_elem.innerHTML.replace(correct_pct_elem.textContent, correct_pct+"%");
-            points_elem.innerHTML = points_elem.innerHTML.replace(points_elem.textContent, points);
+            var lastVoc = voclisten[i];
+            lastVocElem.innerHTML = lastVocElem.innerHTML.replace(lastVocElem.textContent, lastVoc);
+            correctPctElem.innerHTML = correctPctElem.innerHTML.replace(correctPctElem.textContent, correctPct+"%");
+            pointsElem.innerHTML = pointsElem.innerHTML.replace(pointsElem.textContent, points);
             drawChart(datalist);
         }
-        speak("Die Abfrage ist beendet. Sie hatten"+correct_pct.toString()+" Prozent richtig.")
+        speak("Die Abfrage ist beendet. Sie hatten"+correctPct.toString()+" Prozent richtig.")
     }
     else {
         document.location.href = "fotos"
@@ -221,6 +300,9 @@ async function abfrage() {
 
 //saved-vocabulary.html
 
+/**
+ * This method submits the form on the saved-vocabulary.html page and activates the loader animation.
+*/
 var submit = function(event) {
     event.preventDefault();
     document.getElementById('loader').innerHTML = ['<div class="loader" id="loader"></div>']
@@ -232,10 +314,16 @@ var submit = function(event) {
             window.location = "/abfrage/gespeichert/";
         }
 }
+
+/**
+ * This method hides the saved vocabulary set on the saved-vocabulary.html page, that has the inputted id and adapts the arrow icon to show up or down.
+ * @param {text} id Part of the id of the of the aimed at vocabulary set.
+ * @param {html-element} vocSet Html-element of the aimed at vocabulary set.
+ * @param {html-element} arrowIcon Html-element arrow icon of the aimed at vocabulary set.
+*/
 function hideVocSets(id) {
     var vocSet = document.getElementById("voc-set-"+id);
     var arrowIcon = document.getElementById("arrow-icon"+id);
-    // If the checkbox is checked, display the output text
     if (vocSet.style.display == "none"){
         vocSet.style.display = "block";
         arrowIcon.className = "fa fa-chevron-up";
@@ -246,6 +334,12 @@ function hideVocSets(id) {
   }
 
 //vocabulary-correction.html
+
+/**
+ * This method submits the form on the vocabulary-correction.html page.
+ * @param {html-element} checkBox Html-element check box.
+ * @param {html-element} button Html-element of the submit button.
+*/
 function submit() {
     var checkBox = document.getElementById("switch");
     if (checkBox.checked == false){
@@ -255,13 +349,18 @@ function submit() {
     button.form.submit();
   }
 
+/**
+ * This method displays the title field on the vocabulary-correction.html page.
+ * @param {html-element} checkBox Html-element check box.
+ * @param {html-element} titleBox Html-element title box.
+*/
 function displayTitleField() {
     // Get the checkbox
     var checkBox = document.getElementById("switch");
     // Get the output text
     var titleBox = document.getElementById("title-box");
 
-    // If the checkbox is checked, display the output text
+    // If the checkbox is checked, display the title box
     if (checkBox.checked == true){
         titleBox.style.display = "block";
     } else {

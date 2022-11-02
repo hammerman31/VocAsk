@@ -22,7 +22,7 @@ def signup_view(request):
     **Template**
 
     :template:`accounts/signup.html`
-    :template:`vaApp/static/templates/index.html`
+    :template:`main/static/templates/index.html`
 
     """
     if request.method == "POST":
@@ -52,7 +52,7 @@ def login_view(request):
     **Template**
 
     :template:`accounts/login.html`
-    :template:`vaApp/static/templates/index.html`
+    :template:`main/static/templates/index.html`
 
     """
     if request.method == "POST":
@@ -73,7 +73,7 @@ def logout_view(request):
 
     **Template**
 
-    :template:`vaApp/static/templates/index.html`
+    :template:`main/static/templates/index.html`
 
     """
     if request.method == "POST":

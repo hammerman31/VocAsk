@@ -1,5 +1,5 @@
 """
-Django views for abfrage app.
+Django views for interrogations app.
 
 """
 from django.shortcuts import render
@@ -13,7 +13,7 @@ from .forms import VocabularyFormEn, VocabularyFormDe, TitleForm
 
 def fotos_view(request):
     """
-    Display the image page to upload images.
+    Display the foto-upload page to upload images.
 
     **Template**
 
@@ -31,9 +31,9 @@ def is_ajax(request):
     return request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
 
 
-def korrektur(request):
+def vocabulary_correction(request):
     """
-    Display the korrektur page for correcting previosly scanned from uploaded images.
+    Display the vocabulary-correction page for correcting previosly scanned from uploaded images.
 
     **Context**
 
@@ -87,9 +87,9 @@ def korrektur(request):
     return render(request, "interrogation.html")
 
 
-def abfrage(request):
+def interrogation(request):
     """
-    Display the abfrage page for the interrogation.
+    Display the interrogation page for the interrogation.
     Furthermore the vocabulary set is saved if user requested it.
 
     **Context**
@@ -136,7 +136,7 @@ def abfrage(request):
             return render(request, "foto-upload.html")
 
 
-def gespeichert(request):
+def saved_vocabulary(request):
     """
     Display the saved vocabulary sets.
 
@@ -159,9 +159,9 @@ def gespeichert(request):
 
 
 @csrf_exempt
-def gespeicherte_abfrage(request):
+def saved_vocabulary_interrogation(request):
     """
-    Display the abfrage page for the interrogation after user
+    Display the interrogation page for the interrogation after user
     chose a previously saved vocabulary sets.
 
     **Context**

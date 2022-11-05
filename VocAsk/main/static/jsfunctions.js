@@ -194,6 +194,7 @@ function speak(sentence) {
  * @param  {html-element} r Html-Element that displays the words said by the user.
  * @param  {object} spr Object of the webkitSpeechRecognition.
  * @param  {object} ftr Empty string that.
+ * @return Promise
 */
 function startConverting() {   
         
@@ -243,7 +244,7 @@ function vocTransformer(vocId) {
 }
 
 /**
- * This method handels the interrogation. It asks the qustions and responds to the user and it updates tthe statistics.
+ * This method handels the interrogation. It asks the qustions and responds to the user and it updates the statistics.
  * @param {array} voclisten Englisch vocabulary list.
  * @param {array} voclistde German vocabulary list.
  * @param {number} points Amount of points the user got by answering correct. One right answer gives one point.
